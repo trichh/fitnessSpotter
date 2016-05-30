@@ -1,0 +1,98 @@
+<section id="register">
+  <header>
+    <a href="/"><h1>Fitness Spotter</h1></a>
+    <nav>
+      <ul>
+        <li><a href="#">Search for gyms or trainers</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Sign in</a></li>
+        <li><a href="/register">Sign up</a></li>
+      </ul>
+    </nav>
+  </header>
+  <h2>Subscribe to Fitness Spotter</h2>
+  <form ng-submit="register()">
+    <h3>Account info</h3>
+    <label>Email</label>
+    <input type="text" name="email" ng-model="email" />
+    <label>Password</label>
+    <input type="password" name="password" ng-model="password" />
+    <label>Your name/gym name</label>
+    <input type="text" name="name" ng-model="name" />
+    <label>Profile picture</label>
+    <input type="text" name="picture" value="" ng-model="picture" />
+    <a href="#" ngf-select="uploadImage($files)">Upload</a>
+    <label>Phone number</label>
+    <input type="text" name="number" ng-model="number" />
+    <h3>Payment info</h3>
+    <label>Monthly plan</label>
+    <div class="planWrapper">
+      <div class="planContainer">
+        <div id="basic">
+          <h4>Baisc</h4>
+          <p>$20</p>
+        </div>
+        <p>1 Trainer</p>
+        <p>Unlimited clients</p>
+        <p>All features</p>
+      </div>
+      <input type="radio" value="basic" ng-model="basic" />
+    </div>
+    <div class="planWrapper">
+      <div class="planContainer">
+        <div id="plus">
+          <h4>Plus</h4>
+          <p>$45</p>
+        </div>
+        <p>2-5 Trainers</p>
+        <p>Unlimited clients</p>
+        <p>All features</p>
+      </div>
+      <input type="radio" value="plus" ng-model="plus" />
+    </div>
+    <div class="planWrapper">
+      <div class="planContainer">
+        <div id="premium">
+          <h4>Premium</h4>
+          <p>$75</p>
+        </div>
+        <p>6+ Trainers</p>
+        <p>Unlimited clients</p>
+        <p>All features</p>
+      </div>
+      <input type="radio" value="premium" ng-model="premium" />
+    </div>
+    <label>Card holder name</label>
+    <input type="text" name="cardName" ng-model="cardName" />
+    <label>Card number</label>
+    <input type="text" name="cardNumber" ng-model="cardNumber" />
+    <label>Security code</label>
+    <input type="text" name="securityCode" ng-model="securityCode" />
+    <label>Expiration date</label>
+    <select name="month" ng-model="month">
+      <option value="January">January</option>
+      <option value="February">February</option>
+      <option value="March">March</option>
+      <option value="April">April</option>
+      <option value="May">May</option>
+      <option value="June">June</option>
+      <option value="July">July</option>
+      <option value="August">August</option>
+      <option value="September">September</option>
+      <option value="October">October</option>
+      <option value="November">November</option>
+      <option value="December">December</option>
+    </select>
+    <select name="year"ng-model="year">
+      <option value="2016">2016</option>
+      <option value="2017">2017</option>
+      <option value="2018">2018</option>
+      <option value="2019">2019</option>
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+</section>
