@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="fitnessSpotter">
   <head>
+    <base href="/"></base>
     <title>Fitness Spotter</title>
+    <link rel="stylesheet" href="assets/css/main.css" />
+
     <!--  bower:js  -->
     <!--  endbower  -->
+    <script src="lib/lodash/lodash.js" type="text/javascript"></script>
+    <script src="lib/cloudinary-core/cloudinary-core.js" type="text/javascript"></script>
+    <script src="lib/ng-file-upload/ng-file-upload-shim.js" type="text/javascript"></script>
     <script src="lib/angular/angular.js" type="text/javascript"></script>
     <script src="lib/angular-animate/angular-animate.js" type="text/javascript"></script>
-    <script src="lib/angular-resource/angular-resource.js" type="text/javascript"></script>
     <script src="lib/angular-route/angular-route.js" type="text/javascript"></script>
+    <script src="lib/angular-resource/angular-resource.js" type="text/javascript"></script>
+    <script src="lib/cloudinary_ng/js/angular.cloudinary.js" type="text/javascript"></script>
+    <script src="lib/ng-file-upload/ng-file-upload.js" type="text/javascript"></script>
+
+    <script src="assets/js/main.js" type="text/javascript"></script>
+    <script src="assets/js/config.js" type="text/javascript"></script>
   </head>
   <body>
-
+    <ng-view></ng-view>
   </body>
 </html>

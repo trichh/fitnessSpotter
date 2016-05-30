@@ -1,0 +1,194 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: geneva;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: linear-gradient(to bottom, rgba(0,0,0, 0.9) 25%, rgba(67,67,67, 0.15));
+  overflow-x: hidden;
+}
+header h1 {
+  background: url('../imgs/logo.png') no-repeat center center;
+  display: inline-block;
+  height: 56px;
+  margin: 18px 0 0 30px;
+  padding: 0;
+  text-indent: -9999px;
+  width: 350px;
+}
+header nav, header nav ul, header nav ul li {
+  display: inline-block;
+}
+header nav {
+  float: right;
+  margin: 30px 30px 30px 0;
+}
+header nav ul {
+  margin: 0;
+  padding: 0;
+}
+header nav ul li:first-of-type {
+  background: url('../imgs/search.png') no-repeat center;
+  height: 36px;
+  text-indent: -9999px;
+  width: 60px;
+}
+header nav ul li:first-of-type:hover {
+  cursor: pointer;
+}
+header nav ul li:not(:last-child) {
+  padding-right: 30px;
+}
+header nav ul li:last-child {
+  background-color: #2B00FF;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 5px 15px;
+}
+header nav ul li a {
+  color: white;
+  font-size: 30px;
+  text-decoration: none;;
+}
+header nav ul li:not(:last-child) a:hover {
+  border-bottom: solid 1px white;
+}
+section#cta {
+  background: url('../imgs/cta2.png') no-repeat center;
+  background-size: cover;
+  height: 700px;
+  width: 100%;
+}
+section#cta article {
+  margin: 100px auto;
+  top: 50%;
+  width: 983px;
+}
+section#cta article h2 {
+  color: white;
+  font-size: 50px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+section#cta article h2 span {
+  color: #4AE012;
+}
+section#cta article div {
+  margin: 20px auto;
+  width: 375px
+}
+section#cta article div a {
+  border: solid 2px #2B00FF;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  display: inline;
+  font-size: 30px;
+  padding: 5px 15px;
+  text-decoration: none;
+}
+section#cta article div a:first-of-type {
+  margin-right: 20px;
+}
+section#register {
+  background-color: #343333;
+}
+section#register h2 {
+  color: white;
+  font-size: 40px;
+  margin-left: 38px;
+}
+section#register form {
+  margin-left: 38px;
+}
+section#register form h3 {
+  border-bottom: solid 1px white;
+  color: white;
+  font-size: 25px;
+  width: 558px;
+}
+section#register form label {
+  color: white;
+  display: block;
+  font-size: 23px;
+  padding-bottom: 5px;
+}
+section#register form input[type="text"], section#register form input[type="password"] {
+  border-radius: 2px;
+  height: 25px;
+  margin-bottom: 10px;
+  width: 279px;
+}
+section#register form a {
+  background-color: #4AE012;
+  border-radius: 2px;
+  color: black;
+  display: block;
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 90px;
+}
+section#register form div.planWrapper {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 280px;
+}
+section#register form div.planWrapper:not(:last-of-type) {
+  margin-right: 30px;
+}
+section#register form div.planWrapper div.planContainer {
+  border: solid 1px black;
+  margin-bottom: 10px;
+}
+section#register form div.planWrapper div.planContainer div#basic, section#register form div.planWrapper div.planContainer div#plus, section#register form div.planWrapper div.planContainer div#premium {
+  border-bottom: solid 1px black;
+}
+section#register form div.planWrapper div.planContainer h4 {
+  color: white;
+  font-size: 28px;
+  margin: 10px 0;
+  padding: 0;
+  text-align: center;
+}
+section#register form div.planWrapper div.planContainer div p {
+  color: white;
+  font-size: 55px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  text-align: center;
+}
+section#register form div.planWrapper div.planContainer > p {
+  color: white;
+  font-size: 23px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+section#register form div.planWrapper div.planContainer > p:not(:last-of-type) {
+  border-bottom: solid 1px black;
+  margin: 10px 0;
+}
+section#register form input[type="radio"] {
+  margin-left: 130px;
+}
+section#register form select {
+  width: 125px;
+}
+section#register form button {
+  background-color: #4AE012;
+  border: solid 0px black;
+  border-radius: 2px;
+  cursor: pointer;
+  display: block;
+  font-size: 24px;
+  margin: 20px 0;
+  padding: 5px 10px;
+}
