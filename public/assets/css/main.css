@@ -95,6 +95,112 @@ section#cta article div a {
 section#cta article div a:first-of-type {
   margin-right: 20px;
 }
+section#features {
+  background-color: #F5F8FA;
+}
+section#features h3, section#pricing h3, section#contact h3 {
+  font-size: 45px;
+  margin: 0 auto 20px auto;
+  padding-top: 20px;
+  text-align: center;
+  width: 617px;
+}
+section#features article.featureList, section#contact article.contactList {
+  margin: 0 auto;
+  width: 1283px;
+}
+section#features article.featureList:first-of-type {
+  margin-bottom: 20px;
+}
+section#features article.featureList:last-of-type {
+  padding-bottom: 40px;
+}
+section#features article.featureList div.feature, section#contact article.contactList div.contact {
+  display: inline-block;
+  width: 402px;
+}
+section#features article.featureList div.feature:not(:last-of-type), section#contact article.contactList div.contact:not(:last-of-type) {
+  margin-right: 30px;
+}
+section#features article.featureList div.feature h4, section#contact article.contactList div.contact h4 {
+  font-size: 35px;
+  margin: 0 auto;
+  text-align: center;
+  width: 330px;
+}
+section#features article.featureList div.feature p, section#contact article.contactList div.contact p {
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+}
+section#pricing {
+  background-color: #343333;
+}
+section#pricing article {
+  margin: 0 auto;
+  width: 911px;
+}
+div.planWrapper {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 280px;
+}
+div.planWrapper:not(:last-of-type) {
+  margin-right: 30px;
+}
+div.planWrapper div.planContainer {
+  border: solid 1px black;
+  margin-bottom: 10px;
+}
+div.planWrapper div.planContainer div#basic, div.planWrapper div.planContainer div#plus, div.planWrapper div.planContainer div#premium {
+  border-bottom: solid 1px black;
+}
+div.planWrapper div.planContainer h4 {
+  color: white;
+  font-size: 28px;
+  margin: 10px 0;
+  padding: 0;
+  text-align: center;
+}
+div.planWrapper div.planContainer div p {
+  color: white;
+  font-size: 55px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  text-align: center;
+}
+div.planWrapper div.planContainer > p {
+  color: white;
+  font-size: 23px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+div.planWrapper div.planContainer > p:not(:last-of-type) {
+  border-bottom: solid 1px black;
+  margin: 10px 0;
+}
+section#contact article.contactList div.contact:last-of-type p {
+  height: 55px;
+}
+section#contact article.contactList div.contact:last-of-type p:first-of-type::before {
+  background-image: url('../imgs/facebook.png');
+  background-repeat: no-repeat;
+  color: transparent;
+  content: "img";
+}
+section#contact article.contactList div.contact:last-of-type p:nth-of-type(2)::before {
+  background-image: url('../imgs/twitter.png');
+  background-repeat: no-repeat;
+  color: transparent;
+  content: "img";
+}
+section#contact article.contactList div.contact:last-of-type p:last-of-type::before {
+  background-image: url('../imgs/instagram.png');
+  background-repeat: no-repeat;
+  color: transparent;
+  content: "img";
+}
 section#register {
   background-color: #343333;
 }
@@ -135,46 +241,6 @@ section#register form a {
   text-align: center;
   text-decoration: none;
   width: 90px;
-}
-section#register form div.planWrapper {
-  display: inline-block;
-  margin-bottom: 10px;
-  width: 280px;
-}
-section#register form div.planWrapper:not(:last-of-type) {
-  margin-right: 30px;
-}
-section#register form div.planWrapper div.planContainer {
-  border: solid 1px black;
-  margin-bottom: 10px;
-}
-section#register form div.planWrapper div.planContainer div#basic, section#register form div.planWrapper div.planContainer div#plus, section#register form div.planWrapper div.planContainer div#premium {
-  border-bottom: solid 1px black;
-}
-section#register form div.planWrapper div.planContainer h4 {
-  color: white;
-  font-size: 28px;
-  margin: 10px 0;
-  padding: 0;
-  text-align: center;
-}
-section#register form div.planWrapper div.planContainer div p {
-  color: white;
-  font-size: 55px;
-  margin: 0 0 10px 0;
-  padding: 0;
-  text-align: center;
-}
-section#register form div.planWrapper div.planContainer > p {
-  color: white;
-  font-size: 23px;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-section#register form div.planWrapper div.planContainer > p:not(:last-of-type) {
-  border-bottom: solid 1px black;
-  margin: 10px 0;
 }
 section#register form input[type="radio"] {
   margin-left: 130px;

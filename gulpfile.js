@@ -13,7 +13,7 @@ gulp.task('server', function() {
 });
 
 gulp.task('bower', function () {
-  gulp.src('./bower_components')
+  gulp.src('./public/index.html')
     .pipe(wiredep())
     .pipe(gulp.dest('./public'));
 });
