@@ -8,5 +8,9 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/register.html',
       controller: 'RegisterCtrl'
     })
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl'
+    })
     .otherwise('/');
 })

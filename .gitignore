@@ -1,6 +1,2 @@
 node_modules
 public/lib
-ng
-.bowerrc
-README.md
-.gitignore
