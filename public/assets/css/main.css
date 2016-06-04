@@ -3,6 +3,7 @@ html {
   padding: 0;
 }
 body {
+  background-color: #343333;
   font-family: geneva;
   margin: 0;
   padding: 0;
@@ -15,7 +16,7 @@ header h1 {
   background: url('../imgs/logo.png') no-repeat center center;
   display: inline-block;
   height: 56px;
-  margin: 18px 0 0 30px;
+  margin: 18px 0 0 0;
   padding: 0;
   text-indent: -9999px;
   width: 350px;
@@ -25,22 +26,31 @@ header nav, header nav ul, header nav ul li {
 }
 header nav {
   float: right;
-  margin: 30px 30px 30px 0;
+  margin: 30px 0;
 }
 header nav ul {
   margin: 0;
   padding: 0;
 }
 header nav ul li:first-of-type {
-  background: url('../imgs/search.png') no-repeat center;
-  height: 36px;
+  background: url('../imgs/hamburger.png') no-repeat center;
+  height: 34px;
   text-indent: -9999px;
-  width: 60px;
+  width: 50px;
 }
-header nav ul li:first-of-type:hover {
+header nav ul li:not(:first-of-type) {
+  display: none;
+}
+header nav ul li:nth-of-type(2) {
+  background: url('../imgs/search.png') no-repeat center;
+  height: 25px;
+  text-indent: -9999px;
+  width: 50px;
+}
+header nav ul li:nth-of-type(2):hover {
   cursor: pointer;
 }
-header nav ul li:not(:last-child) {
+header nav ul li:not(:first-of-type) {
   padding-right: 30px;
 }
 header nav ul li:last-child {
@@ -51,7 +61,7 @@ header nav ul li:last-child {
 }
 header nav ul li a {
   color: white;
-  font-size: 30px;
+  font-size: 20px;
   text-decoration: none;;
 }
 header nav ul li:not(:last-child) a:hover {
@@ -64,19 +74,19 @@ section#cta {
   width: 100%;
 }
 section#cta article {
-  margin: 100px auto;
-  top: 50%;
+  margin: 130px auto;
   width: 983px;
 }
 section#cta article h2 {
   color: white;
-  font-size: 50px;
+  font-size: 45px;
   margin: 0;
   padding: 0;
   text-align: center;
 }
 section#cta article h2 span {
   color: #4AE012;
+  width: 100%;
 }
 section#cta article div {
   margin: 20px auto;
@@ -95,7 +105,7 @@ section#cta article div a {
 section#cta article div a:first-of-type {
   margin-right: 20px;
 }
-section#features {
+section#features, section#contact {
   background-color: #F5F8FA;
 }
 section#features h3, section#pricing h3, section#contact h3 {
@@ -107,7 +117,7 @@ section#features h3, section#pricing h3, section#contact h3 {
 }
 section#features article.featureList, section#contact article.contactList {
   margin: 0 auto;
-  width: 1283px;
+  width: 1277px;
 }
 section#features article.featureList:first-of-type {
   margin-bottom: 20px;
@@ -123,6 +133,7 @@ section#features article.featureList div.feature:not(:last-of-type), section#con
   margin-right: 30px;
 }
 section#features article.featureList div.feature h4, section#contact article.contactList div.contact h4 {
+  color: #2B00FF;
   font-size: 35px;
   margin: 0 auto;
   text-align: center;
@@ -201,9 +212,6 @@ section#contact article.contactList div.contact:last-of-type p:last-of-type::bef
   color: transparent;
   content: "img";
 }
-section#register {
-  background-color: #343333;
-}
 section#register h2 {
   color: white;
   font-size: 40px;
@@ -257,4 +265,27 @@ section#register form button {
   font-size: 24px;
   margin: 20px 0;
   padding: 5px 10px;
+}
+
+
+
+
+
+@media screen and (min-width: 460px) {
+  header h1 {
+    margin-left: 30px;
+  }
+}
+@media screen and (min-width: 490px) {
+  header nav {
+    margin-right: 30px;
+  }
+}
+@media screen and (min-width: 1026px) {
+  header nav ul li:first-of-type {
+    display: none;
+  }
+  header nav ul li:not(:first-of-type) {
+    display: inline-block;
+  }
 }

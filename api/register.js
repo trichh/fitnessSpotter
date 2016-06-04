@@ -2,9 +2,6 @@ var router = require('express').Router();
 var bodyParser = require('body-parser');
 var User = require('../models/user.js');
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-
 router.post('/register', function(req, res) {
   var trainer = new User({
     email: req.body.email,

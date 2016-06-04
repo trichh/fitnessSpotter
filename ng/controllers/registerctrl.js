@@ -46,7 +46,19 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
       var plan = premium;
     }
 
-    $http.post("/api/register", { email: email, password: password, gymName: name, profilePicture: profilePic, phoneNumber: number, paymentPlan: plan, cardHolder: cardName, cardNumber: cardNumber, securityCode: securityCode, month: month, year: year})
+    $http.post('/api/register', {
+      email: email,
+      password: password,
+      gymName: name,
+      profilePicture: profilePic,
+      phoneNumber: number,
+      paymentPlan: plan,
+      cardHolder: cardName,
+      cardNumber: cardNumber,
+      securityCode: securityCode,
+      month: month,
+      year: year
+    })
     .then(function(data) {
       console.log('COMING BACK: ', data);
     })
