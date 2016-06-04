@@ -5,7 +5,6 @@ var mongoose = require('./db.js');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var flash=require('connect-flash');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('./models/user.js');
 
@@ -16,7 +15,7 @@ passport.use('login', new LocalStrategy({
 },
 function(req, email, password, done){
   process.nextTick(function(){
-    User.findOne({'email': email}, function(err, user){
+    User.findOne({'email': email, 'password': password}, function(err, user){
       if(user)
         return done(null, user);
       if(err)
@@ -39,7 +38,17 @@ var app = express();
 
 mongoose.createConnection('mongodb://localhost/fitnessSpotter');
 
-require('./routes.js')(app, passport);
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+    return next();
+  res.redirect('/');
+}
+
+app.get('/dashboard', isLoggedIn, function(req, res) {
+  res.render('./public/assets/views/dashboard.html', {
+    user : req.user
+  });
+});
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -53,7 +62,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
 app.use(express.static('public'));
 
