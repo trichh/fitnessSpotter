@@ -74,19 +74,21 @@ section#cta {
   width: 100%;
 }
 section#cta article {
-  margin: 130px auto;
-  width: 983px;
+  margin: 75px auto;
+  width: 375px;
 }
 section#cta article h2 {
   color: white;
-  font-size: 45px;
+  font-size: 30px;
   margin: 0;
-  padding: 0;
   text-align: center;
+  width: 100%;
+}
+section#cta article h2:not(:last-of-type) {
+  padding: 10px 0;
 }
 section#cta article h2 span {
   color: #4AE012;
-  width: 100%;
 }
 section#cta article div {
   margin: 20px auto;
@@ -113,11 +115,11 @@ section#features h3, section#pricing h3, section#contact h3 {
   margin: 0 auto 20px auto;
   padding-top: 20px;
   text-align: center;
-  width: 617px;
+  width: 100%;
 }
 section#features article.featureList, section#contact article.contactList {
   margin: 0 auto;
-  width: 1277px;
+  width: 100%;
 }
 section#features article.featureList:first-of-type {
   margin-bottom: 20px;
@@ -127,10 +129,7 @@ section#features article.featureList:last-of-type {
 }
 section#features article.featureList div.feature, section#contact article.contactList div.contact {
   display: inline-block;
-  width: 402px;
-}
-section#features article.featureList div.feature:not(:last-of-type), section#contact article.contactList div.contact:not(:last-of-type) {
-  margin-right: 30px;
+  width: 100%;
 }
 section#features article.featureList div.feature h4, section#contact article.contactList div.contact h4 {
   color: #2B00FF;
@@ -141,15 +140,17 @@ section#features article.featureList div.feature h4, section#contact article.con
 }
 section#features article.featureList div.feature p, section#contact article.contactList div.contact p {
   font-size: 20px;
-  margin: 0;
+  margin: 0 auto;
+  padding: 0 20px;
   text-align: center;
+  width: 75%;
 }
 section#pricing {
   background-color: #343333;
 }
 section#pricing article {
   margin: 0 auto;
-  width: 911px;
+  width: 100%;
 }
 div.planWrapper {
   display: inline-block;
@@ -224,7 +225,7 @@ section#register form h3 {
   border-bottom: solid 1px white;
   color: white;
   font-size: 25px;
-  width: 558px;
+  width: 350px;
 }
 section#register form label {
   color: white;
@@ -275,10 +276,46 @@ section#register form button {
   header h1 {
     margin-left: 30px;
   }
+  section#features h3, section#pricing h3, section#contact h3 {
+    width: 460px;
+  }
 }
 @media screen and (min-width: 490px) {
   header nav {
     margin-right: 30px;
+  }
+}
+@media screen and (min-width: 595px) {
+  section#cta article {
+    width: 595px;
+  }
+  section#cta article h2 {
+    font-size: 45px;
+  }
+  section#register form h3 {
+    width: 558px;
+  }
+}
+@media screen and (min-width: 617px) {
+  section#features h3, section#pricing h3, section#contact h3 {
+    width: 617px;
+  }
+}
+@media screen and (min-width: 800px) {
+  section#cta article {
+    width: 800px;
+  }
+}
+@media screen and (min-width: 985px) {
+  section#cta article {
+    margin: 130px auto;
+    width: 983px;
+  }
+  section#cta article h2:not(:last-of-type) {
+    padding: 0;
+  }
+  section#pricing article {
+    width: 911px;
   }
 }
 @media screen and (min-width: 1026px) {
@@ -287,5 +324,36 @@ section#register form button {
   }
   header nav ul li:not(:first-of-type) {
     display: inline-block;
+  }
+}
+@media screen and (min-width: 1040px) {
+  section#features article.featureList div.feature:not(:last-of-type), section#contact article.contactList div.contact:not(:last-of-type) {
+    margin-right: 30px;
+  }
+  section#features article.featureList, section#contact article.contactList {
+    width: 971px;
+  }
+  section#features article.featureList div.feature, section#contact article.contactList div.contact {
+    width: 300px;
+  }
+  section#features article.featureList div.feature p, section#contact article.contactList div.contact p {
+    margin: 0;
+    width: 94%;
+  }
+}
+@media screen and (min-width: 1125px) {
+  section#features article.featureList, section#contact article.contactList {
+    width: 1121px;
+  }
+  section#features article.featureList div.feature, section#contact article.contactList div.contact {
+    width: 350px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  section#features article.featureList, section#contact article.contactList {
+    width: 1277px;
+  }
+  section#features article.featureList div.feature, section#contact article.contactList div.contact {
+    width: 402px;
   }
 }

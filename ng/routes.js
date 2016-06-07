@@ -13,15 +13,15 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       controller: 'LoginCtrl'
     })
     .when('/dashboard', {
-      templateUrl: 'views/dashboard.html'
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
     })
-    // .when('/dashboard/:username/admin', {
-    //   templateUrl: 'views/login.html',
-    //   controller: 'LoginCtrl'
-    // })
+    .when('/dashboard/:gym-name/admin', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'LoginCtrl'
+    })
     .otherwise('/');
 }).run(function($rootScope, $http){
-  // Logout function is available in any pages
   $rootScope.logout = function(){
     $http.post('/logout');
   };

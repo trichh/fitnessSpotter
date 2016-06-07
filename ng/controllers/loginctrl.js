@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('LoginCtrl', function($scope, $location, $http) {
+angular.module('fitnessSpotter').controller('LoginCtrl', function($rootScope, $scope, $location, $http) {
   $scope.login = function() {
     var email = $scope.email;
     var password = $scope.password;
@@ -7,9 +7,9 @@ angular.module('fitnessSpotter').controller('LoginCtrl', function($scope, $locat
       email: email,
       password: password
     })
-    .success(function(user) {
-      console.log('Authentication successful!');
+    .success(function(data) {
       $location.path('/dashboard');
+      console.log('Authentication successful!');
     })
     .error(function() {
       console.log('Authentication unsuccessful!');

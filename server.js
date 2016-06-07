@@ -74,10 +74,10 @@ app.get('/logout', function(req, res) {
   res.send(200);
 });
 
-app.post('/api/login', passport.authenticate('login', {
-  successRedirect : '/dashboard',
-  failureRedirect : '/'
-}));
+app.post('/api/login', passport.authenticate('login'), function(req, res) {
+  res.redirect('/dashboard/' + req.user.gymName);
+  console.log(req.user.gymName);
+});
 
 app.use('/api', require('./api/register.js'));
 

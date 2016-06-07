@@ -15,15 +15,15 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       controller: 'LoginCtrl'
     })
     .when('/dashboard', {
-      templateUrl: 'views/dashboard.html'
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
     })
-    // .when('/dashboard/:username/admin', {
-    //   templateUrl: 'views/login.html',
-    //   controller: 'LoginCtrl'
-    // })
+    .when('/dashboard/:gym-name/admin', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'LoginCtrl'
+    })
     .otherwise('/');
 }]).run(["$rootScope", "$http", function($rootScope, $http){
-  // Logout function is available in any pages
   $rootScope.logout = function(){
     $http.post('/logout');
   };
@@ -40,7 +40,17 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
 
 */
 
-angular.module('fitnessSpotter').controller('LoginCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+  $http.get('/api/dashboard')
+  .then(function(data) {
+    console.log("DATA:", data);
+  })
+  .catch(function(err) {
+    console.log(err);
+  })
+}]);
+
+angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
   $scope.login = function() {
     var email = $scope.email;
     var password = $scope.password;
@@ -49,9 +59,9 @@ angular.module('fitnessSpotter').controller('LoginCtrl', ["$scope", "$location",
       email: email,
       password: password
     })
-    .success(function(user) {
-      console.log('Authentication successful!');
+    .success(function(data) {
       $location.path('/dashboard');
+      console.log('Authentication successful!');
     })
     .error(function() {
       console.log('Authentication unsuccessful!');

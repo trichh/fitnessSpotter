@@ -23,4 +23,12 @@ router.post('/register', function(req, res) {
   });
 });
 
+router.get('/dashboard', function(req, res) {
+  console.log("Looking for data in mongo");
+  User.find({}, function(err, data) {
+    console.log("Data found in mongodb: ", data)
+    return data;
+  })
+})
+
 module.exports = router;
