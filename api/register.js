@@ -28,7 +28,7 @@ router.get('/dashboard', function(req, res) {
   User.find({}, function(err, data) {
     console.log("Data found in mongodb: ", data)
     return data;
-  })
-})
+  });
+});
 
 module.exports = router;
