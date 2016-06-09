@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/trichh/fitnessSpotter#readme",
   "dependencies": {
+    "assert": "^1.4.1",
     "body-parser": "1.15.1",
     "bower": "1.7.9",
+    "connect-mongodb-session": "^1.1.1",
     "cookie-parser": "1.4.3",
     "express": "4.13.4",
     "express-session": "1.13.0",
