@@ -14,8 +14,61 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
     })
+    .when('/dashboard', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
+    .when('/dashboard/:gym-name/admin', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'LoginCtrl'
+    })
     .otherwise('/');
-}])
+}]).run(["$rootScope", "$http", function($rootScope, $http){
+  $rootScope.logout = function(){
+    $http.post('/logout');
+  };
+}]);
+
+/*
+// you route to get there
+    var username = _.fixthisshit($scope.authData.username)
+    $location.path('/dashboard/'+ username +'/admin')
+
+// once you're in that controller
+    bring in $routeParams (with $scope)
+    :username = $routeParams.username
+
+*/
+
+angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+  $http.get('/api/dashboard')
+  .then(function(data) {
+    console.log("DATA:", data);
+  })
+  .catch(function(err) {
+    console.log(err);
+  })
+}]);
+
+angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
+  $scope.login = function() {
+    var email = $scope.email;
+    var password = $scope.password;
+
+    $http.post('/api/login', {
+      email: email,
+      password: password
+    })
+    .success(function(data) {
+      $location.path('/dashboard');
+      console.log('Authentication successful!');
+    })
+    .error(function() {
+      console.log('Authentication unsuccessful!');
+      $location.path('/');
+    })
+  }
+}]);
 
 angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
   $scope.uploadImage = function(files){
@@ -65,7 +118,19 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
       var plan = premium;
     }
 
-    $http.post("/api/register", { email: email, password: password, gymName: name, profilePicture: profilePic, phoneNumber: number, paymentPlan: plan, cardHolder: cardName, cardNumber: cardNumber, securityCode: securityCode, month: month, year: year})
+    $http.post('/api/register', {
+      email: email,
+      password: password,
+      gymName: name,
+      profilePicture: profilePic,
+      phoneNumber: number,
+      paymentPlan: plan,
+      cardHolder: cardName,
+      cardNumber: cardNumber,
+      securityCode: securityCode,
+      month: month,
+      year: year
+    })
     .then(function(data) {
       console.log('COMING BACK: ', data);
     })

@@ -2,9 +2,6 @@ var router = require('express').Router();
 var bodyParser = require('body-parser');
 var User = require('../models/user.js');
 
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-
 router.post('/register', function(req, res) {
   var trainer = new User({
     email: req.body.email,
@@ -23,6 +20,14 @@ router.post('/register', function(req, res) {
   trainer.save(function(err) {
     if(err) throw err;
     console.log("New trainer saved succesfully");
+  });
+});
+
+router.get('/dashboard', function(req, res) {
+  console.log("Looking for data in mongo");
+  User.find({}, function(err, data) {
+    console.log("Data found in mongodb: ", data)
+    return data;
   });
 });
 

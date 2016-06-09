@@ -12,5 +12,28 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
     })
+    .when('/dashboard', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
+    .when('/dashboard/:gym-name/admin', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'LoginCtrl'
+    })
     .otherwise('/');
-})
+}).run(function($rootScope, $http){
+  $rootScope.logout = function(){
+    $http.post('/logout');
+  };
+});
+
+/*
+// you route to get there
+    var username = _.fixthisshit($scope.authData.username)
+    $location.path('/dashboard/'+ username +'/admin')
+
+// once you're in that controller
+    bring in $routeParams (with $scope)
+    :username = $routeParams.username
+
+*/
