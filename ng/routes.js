@@ -16,10 +16,14 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardCtrl'
     })
-    .when('/dashboard/:gym-name/admin', {
-      templateUrl: 'views/dashboard.html',
-      controller: 'LoginCtrl'
+    .when('/add-client', {
+      templateUrl: 'views/addClient.html',
+      controller: 'NewClientCtrl'
     })
+    // .when('/dashboard/:gym-name/admin', {
+    //   templateUrl: 'views/dashboard.html',
+    //   controller: 'LoginCtrl'
+    // })
     .otherwise('/');
 }).run(function($rootScope, $http){
   $rootScope.logout = function(){

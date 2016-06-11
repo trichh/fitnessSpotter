@@ -68,9 +68,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(session({
-  saveUninitialized: false,
+  saveUninitialized: true,
   secret: '00308118',
   resave: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
   store: store
 }));
 
@@ -90,7 +93,7 @@ app.get('/logout', function(req, res) {
 
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.redirect('/dashboard');
-  console.log(req.user.gymName);
+  console.log(req.user);
 });
 
 app.use('/api', require('./api/register.js'));

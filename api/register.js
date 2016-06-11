@@ -23,6 +23,22 @@ router.post('/register', function(req, res) {
   });
 });
 
+router.post('/add-client', function(req, res) {
+  var client = new Client({
+    name: req.body.fullname,
+    weight: req.body.weight,
+    profilePicture: req.body.profilePic,
+    workoutPlan: req.body.workoutPlan,
+    mealPlan: req.body.mealPlan,
+    clientAssessment: req.body.clientAssessment,
+    dateCreated: Date.now
+  });
+  client.save(function(err) {
+    if(err) throw err;
+    console.log("New client saved succesfully");
+  });
+});
+
 router.get('/dashboard', function(req, res) {
   console.log("Looking for data in mongo");
   User.find({}, function(err, data) {
