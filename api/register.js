@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var bodyParser = require('body-parser');
 var User = require('../models/user.js');
+var Client = require('../models/client.js');
 
 router.post('/register', function(req, res) {
   var trainer = new User({
@@ -20,6 +21,22 @@ router.post('/register', function(req, res) {
   trainer.save(function(err) {
     if(err) throw err;
     console.log("New trainer saved succesfully");
+  });
+});
+
+router.post('/add-client', function(req, res) {
+  var client = new Client({
+    name: req.body.fullname,
+    weight: req.body.weight,
+    profilePicture: req.body.profilePic,
+    workoutPlan: req.body.workoutPlan,
+    mealPlan: req.body.mealPlan,
+    clientAssessment: req.body.clientAssessment,
+    dateCreated: Date.now
+  });
+  client.save(function(err) {
+    if(err) throw err;
+    console.log("New client saved succesfully");
   });
 });
 

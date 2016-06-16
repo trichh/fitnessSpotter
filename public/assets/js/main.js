@@ -18,10 +18,14 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardCtrl'
     })
-    .when('/dashboard/:gym-name/admin', {
-      templateUrl: 'views/dashboard.html',
-      controller: 'LoginCtrl'
+    .when('/add-client', {
+      templateUrl: 'views/addClient.html',
+      controller: 'NewClientCtrl'
     })
+    // .when('/dashboard/:gym-name/admin', {
+    //   templateUrl: 'views/dashboard.html',
+    //   controller: 'LoginCtrl'
+    // })
     .otherwise('/');
 }]).run(["$rootScope", "$http", function($rootScope, $http){
   $rootScope.logout = function(){
@@ -41,7 +45,7 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
 */
 
 angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
-  $http.get('/api/dashboard')
+  $http.get('/dashboard')
   .then(function(data) {
     console.log("DATA:", data);
   })
@@ -66,6 +70,53 @@ angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope"
     .error(function() {
       console.log('Authentication unsuccessful!');
       $location.path('/');
+    })
+  }
+}]);
+
+angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
+  $scope.uploadImage = function(files){
+    $scope.files = files;
+    if (!$scope.files) return;
+    angular.forEach(files, function(file){
+      if (file && !file.$error) {
+        file.upload = $upload.upload({
+          url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
+          data: {
+            upload_preset: cloudinary.config().upload_preset,
+            tags: 'myphotoalbum',
+            file: file
+          }
+        }).success(function (data, status, headers, config) {
+          file.result = data;
+          var imageUrl = data.url;
+          $scope.photo = imageUrl;
+        }).error(function (data, status, headers, config) {
+          // Sends error if any
+          file.result = data;
+        });
+      }
+    });
+  }
+
+  $scope.addClient = function() {
+    var fullName = $scope.fullName;
+    var weight = $scope.weight;
+    var profilePic = $scope.photo;
+    var workoutPlan = $scope.workoutPlan;
+    var mealPlan = $scope.mealPlan;
+    var clientAssessment = $scope.clientAssessment;
+
+    $http.post('/api/add-client', {
+      name: fullName,
+      weight: weight,
+      profilePicture: profilePic,
+      workoutPlan: workoutPlan,
+      mealPlan: mealPlan,
+      clientAssessment: clientAssessment
+    })
+    .then(function(data) {
+      console.log('COMING BACK: ', data);
     })
   }
 }]);
