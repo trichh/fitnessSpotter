@@ -6,20 +6,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var LocalStrategy = require('passport-local').Strategy;
-var mongoStore = require('connect-mongodb-session')(session);
-var assert = require('assert');
 var User = require('./models/user.js');
-
-var store = new mongoStore(
-{
-  uri: 'mongodb://localhost:/fitnessSpotter_sessions',
-  collection: 'mySessions'
-});
-
-store.on('error', function(error) {
-  assert.ifError(error);
-  assert.ok(false);
-});
 
 passport.use('login', new LocalStrategy({
   usernameField: 'email',
@@ -70,11 +57,7 @@ app.use(bodyParser.json());
 app.use(session({
   saveUninitialized: true,
   secret: '00308118',
-  resave: true,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-  },
-  store: store
+  resave: true
 }));
 
 app.use(passport.initialize());
@@ -92,7 +75,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
-  res.redirect('/dashboard');
+  res.redirect('/dashboard/' + req.user.gymName);
   console.log(req.user);
 });
 

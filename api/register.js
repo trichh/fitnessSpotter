@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var bodyParser = require('body-parser');
 var User = require('../models/user.js');
+var Client = require('../models/client.js');
 
 router.post('/register', function(req, res) {
   var trainer = new User({

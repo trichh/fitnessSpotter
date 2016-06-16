@@ -32,7 +32,7 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope
     var clientAssessment = $scope.clientAssessment;
 
     $http.post('/api/add-client', {
-      name: fullname,
+      name: fullName,
       weight: weight,
       profilePicture: profilePic,
       workoutPlan: workoutPlan,
