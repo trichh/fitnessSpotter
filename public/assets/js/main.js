@@ -45,7 +45,7 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
 */
 
 angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
-  $http.get('/dashboard')
+  $http.post('/api/dashboard')
   .then(function(data) {
     console.log("DATA:", data);
   })
