@@ -76,7 +76,7 @@ app.get('/logout', function(req, res) {
 
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.redirect('/dashboard/' + req.user.gymName);
-  console.log(req.user);
+  // console.log(req.user);
 });
 
 app.use('/api', require('./api/register.js'));

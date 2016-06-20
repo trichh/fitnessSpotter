@@ -40,9 +40,9 @@ router.post('/add-client', function(req, res) {
   });
 });
 
-router.get('/dashboard', function(req, res) {
+router.post('/dashboard', function(req, res) {
   console.log("Looking for data in mongo");
-  User.find({}, function(err, data) {
+  User.findOne({}, function(err, data) {
     console.log("Data found in mongodb: ", data)
     return data;
   });

@@ -267,6 +267,49 @@ section#register form button {
   margin: 20px 0;
   padding: 5px 10px;
 }
+section#login div {
+  background-color: white;
+  border-radius: 5px;
+  height: 285px;
+  margin: 100px auto;
+  width: 380px;
+}
+section#login div form label {
+  display: block;
+  font-size: 23px;
+  padding: 0 0 5px 50px;
+}
+section#login div form label:first-of-type {
+  padding-top: 30px;
+}
+section#login div form input[type="text"], section#login div form input[type="password"] {
+  border-radius: 2px;
+  display: block;
+  height: 28px;
+  margin: 0 0 10px 50px;
+  width: 290px;
+}
+section#login div form a {
+  background-color: #2B00FF;
+  border: solid 0px black;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  margin: 0 95px 0 50px;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+section#login div form button {
+  background-color: #4AE012;
+  border: solid 0px black;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+  margin: 20px 0;
+  padding: 5px 10px;
+}
 section#dashboard article#gym {
   margin: 0 auto;
   width: 458px;
@@ -306,6 +349,54 @@ section#dashboard article#clients article.client ul li {
 section#dashboard article#clients article.client ul li a {
   color: #4AE012;
 }
+section#newClient h2 {
+  color: white;
+  font-size: 40px;
+  margin-left: 38px;
+}
+section#newClient form {
+  margin-left: 38px;
+}
+section#newClient form h3 {
+  border-bottom: solid 1px white;
+  color: white;
+  font-size: 25px;
+  width: 350px;
+}
+section#newClient form label {
+  color: white;
+  display: block;
+  font-size: 23px;
+  padding-bottom: 5px;
+}
+section#newClient form input[type="text"] {
+  border-radius: 2px;
+  height: 25px;
+  margin-bottom: 10px;
+  width: 279px;
+}
+section#newClient form a {
+  background-color: #4AE012;
+  border-radius: 2px;
+  color: black;
+  display: block;
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 90px;
+}
+section#newClient form button {
+  background-color: #4AE012;
+  border: solid 0px black;
+  border-radius: 2px;
+  cursor: pointer;
+  display: block;
+  font-size: 24px;
+  margin: 20px 0;
+  padding: 5px 10px;
+}
 
 
 
@@ -330,6 +421,18 @@ section#dashboard article#clients article.client ul li a {
     font-size: 45px;
   }
   section#register form h3 {
+    width: 558px;
+  }
+  section#login div {
+    width: 500px;
+  }
+  section#login div form input[type="text"], section#login div form input[type="password"] {
+    width: 380px;
+  }
+  section#login div form a {
+    margin: 0 184px 0 50px;
+  }
+  section#newClient form h3 {
     width: 558px;
   }
 }

@@ -1,23 +1,26 @@
-<section #login>
+<section id="login">
   <header>
     <a href="/"><h1>Fitness Spotter</h1></a>
     <nav id="homeNav">
       <ul>
         <li><a href="#">Menu</a></li>
         <li><a href="#">Search for gyms or trainers</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/#contact">Contact</a></li>
         <li><a href="/login">Sign in</a></li>
         <li><a href="/register">Sign up</a></li>
       </ul>
     </nav>
   </header>
-  <form ng-submit="login()">
-    <label>Email</label>
-    <input type="text" name ="email" ng-model="email" />
-    <label>Password</label>
-    <input type="password" name="password" ng-model="password" />
-    <button type="submit">Sign In</button>
-  </form>
+  <div>
+    <form ng-submit="login()">
+      <label>Email</label>
+      <input type="text" name ="email" ng-model="email" />
+      <label>Password</label>
+      <input type="password" name="password" ng-model="password" />
+      <a href="/register">Sign up</a>
+      <button type="submit">Sign in</button>
+    </form>
+  </div>
 </section>

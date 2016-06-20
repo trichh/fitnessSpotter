@@ -1,7 +1,12 @@
 var mongoose = require('../db.js');
+var shortid = require('shortid');
 
 var Schema = mongoose.Schema;
 var userSchema = new Schema({
+  _id: {
+    type: String,
+    'default': shortid.generate
+  },
   email: String,
   password: String,
   gymName: String,
