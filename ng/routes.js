@@ -1,5 +1,8 @@
 angular.module('fitnessSpotter').config(function($routeProvider, $locationProvider) {
+  // Takes '#' out of url
   $locationProvider.html5Mode(true);
+
+  // Specifying what controllers and views to use on what route
   $routeProvider
     .when('/', {
       templateUrl: 'views/home.html'
@@ -25,19 +28,10 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
     //   controller: 'LoginCtrl'
     // })
     .otherwise('/');
-}).run(function($rootScope, $http){
+})
+// Allows logout function to run
+.run(function($rootScope, $http){
   $rootScope.logout = function(){
     $http.post('/logout');
   };
 });
-
-/*
-// you route to get there
-    var username = _.fixthisshit($scope.authData.username)
-    $location.path('/dashboard/'+ username +'/admin')
-
-// once you're in that controller
-    bring in $routeParams (with $scope)
-    :username = $routeParams.username
-
-*/

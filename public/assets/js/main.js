@@ -1,7 +1,10 @@
 var fitnessSpotter = angular.module('fitnessSpotter', ['ngRoute', 'ngAnimate', 'cloudinary', 'ngFileUpload'])
 
 angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
+  // Takes '#' out of url
   $locationProvider.html5Mode(true);
+
+  // Specifying what controllers and views to use on what route
   $routeProvider
     .when('/', {
       templateUrl: 'views/home.html'
@@ -27,60 +30,65 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
     //   controller: 'LoginCtrl'
     // })
     .otherwise('/');
-}]).run(["$rootScope", "$http", function($rootScope, $http){
+}])
+// Allows logout function to run
+.run(["$rootScope", "$http", function($rootScope, $http){
   $rootScope.logout = function(){
     $http.post('/logout');
   };
 }]);
 
-/*
-// you route to get there
-    var username = _.fixthisshit($scope.authData.username)
-    $location.path('/dashboard/'+ username +'/admin')
-
-// once you're in that controller
-    bring in $routeParams (with $scope)
-    :username = $routeParams.username
-
-*/
-
 angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+  // Get request to /api/dashboard
   $http.get('/api/dashboard')
   .then(function(data) {
+    // Data coming back
     console.log("DATA MOTHA FUCKA:", data.data);
+    // Making scope variable to use users gym name in dashboard view
     $scope.gymName = data.data.gymName;
+    // Making scope variable to use users profile picture in dashboard view
+    $scope.profilePicture = data.data.profilePicture;
   })
   .catch(function(err) {
+    // If any errors console log error
     console.log(err);
   })
 }]);
 
 angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
+  // Function runs when users submit login form
   $scope.login = function() {
+    // Grabbing users email and password from the email and password input fields
     var email = $scope.email;
     var password = $scope.password;
 
+    // Making post request to /api/login
     $http.post('/api/login', {
+      // Sends data to backend
       email: email,
       password: password
     })
     .success(function(data) {
+      // If successful redirect to dashboard
       $location.path('/dashboard');
       console.log('Authentication successful!');
     })
-    .error(function() {
-      console.log('Authentication unsuccessful!');
+    .error(function(err) {
+      // If any errors redirect back to homepage
+      console.log('Authentication unsuccessful!', err);
       $location.path('/');
     })
   }
 }]);
 
 angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
+  // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
     if (!$scope.files) return;
     angular.forEach(files, function(file){
       if (file && !file.$error) {
+        // Configuring cloudinary api and specifying where to upload image
         file.upload = $upload.upload({
           url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
           data: {
@@ -90,7 +98,9 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$sc
           }
         }).success(function (data, status, headers, config) {
           file.result = data;
+          // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
+          // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
         }).error(function (data, status, headers, config) {
           // Sends error if any
@@ -100,7 +110,9 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$sc
     });
   }
 
+  // Function runs when users submit add client form
   $scope.addClient = function() {
+    // Grabbing new clients info from the input fields
     var fullName = $scope.fullName;
     var weight = $scope.weight;
     var profilePic = $scope.photo;
@@ -108,7 +120,9 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$sc
     var mealPlan = $scope.mealPlan;
     var clientAssessment = $scope.clientAssessment;
 
+    // Making post request to /api/add-client
     $http.post('/api/add-client', {
+      // Sends data to backend so we can insert this information into the database
       name: fullName,
       weight: weight,
       profilePicture: profilePic,
@@ -123,11 +137,13 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$sc
 }]);
 
 angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
+  // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
     if (!$scope.files) return;
     angular.forEach(files, function(file){
       if (file && !file.$error) {
+        // Configuring cloudinary api and specifying where to upload image
         file.upload = $upload.upload({
           url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
           data: {
@@ -137,7 +153,9 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
           }
         }).success(function (data, status, headers, config) {
           file.result = data;
+          // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
+          // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
         }).error(function (data, status, headers, config) {
           // Sends error if any
@@ -147,7 +165,9 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     });
   }
 
+  // Function runs when users submit sign up form
   $scope.register = function() {
+    // Grabbing new users info from the input fields
     var email = $scope.email;
     var password = $scope.password;
     var name = $scope.name;
@@ -163,14 +183,19 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     var year = $scope.year;
 
     if(typeof basic !== undefined && plus === undefined && premium === undefined) {
+      // If user selects basic plan set plan variable to basic
       var plan = basic;
     } else if(typeof plus !== undefined && basic === undefined && premium === undefined) {
+      // If user selects plus plan set plan variable to plus
       var plan = plus;
     } else if(typeof premium !== undefined && basic === undefined && plus === undefined) {
+      // If user selects premium plan set plan variable to premium
       var plan = premium;
     }
 
+    // Making post request to /api/register
     $http.post('/api/register', {
+      // Sends data to backend so we can insert this information into the database
       email: email,
       password: password,
       gymName: name,

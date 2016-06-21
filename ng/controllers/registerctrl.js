@@ -1,9 +1,11 @@
 angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
+  // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
     if (!$scope.files) return;
     angular.forEach(files, function(file){
       if (file && !file.$error) {
+        // Configuring cloudinary api and specifying where to upload image
         file.upload = $upload.upload({
           url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
           data: {
@@ -13,7 +15,9 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
           }
         }).success(function (data, status, headers, config) {
           file.result = data;
+          // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
+          // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
         }).error(function (data, status, headers, config) {
           // Sends error if any
@@ -23,7 +27,9 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     });
   }
 
+  // Function runs when users submit sign up form
   $scope.register = function() {
+    // Grabbing new users info from the input fields
     var email = $scope.email;
     var password = $scope.password;
     var name = $scope.name;
@@ -39,14 +45,19 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     var year = $scope.year;
 
     if(typeof basic !== undefined && plus === undefined && premium === undefined) {
+      // If user selects basic plan set plan variable to basic
       var plan = basic;
     } else if(typeof plus !== undefined && basic === undefined && premium === undefined) {
+      // If user selects plus plan set plan variable to plus
       var plan = plus;
     } else if(typeof premium !== undefined && basic === undefined && plus === undefined) {
+      // If user selects premium plan set plan variable to premium
       var plan = premium;
     }
 
+    // Making post request to /api/register
     $http.post('/api/register', {
+      // Sends data to backend so we can insert this information into the database
       email: email,
       password: password,
       gymName: name,
