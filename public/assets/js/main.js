@@ -45,9 +45,10 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
 */
 
 angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
-  $http.post('/api/dashboard')
+  $http.get('/api/dashboard')
   .then(function(data) {
-    console.log("DATA:", data);
+    console.log("DATA MOTHA FUCKA:", data.data);
+    $scope.gymName = data.data.gymName;
   })
   .catch(function(err) {
     console.log(err);
