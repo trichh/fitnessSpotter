@@ -65,10 +65,6 @@ app.use(passport.session());
 
 app.use(express.static('public'));
 
-app.get('*', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html');
-});
-
 app.get('/logout', function(req, res) {
   req.logout();
   res.send(200);
@@ -80,6 +76,10 @@ app.post('/api/login', passport.authenticate('login'), function(req, res) {
 });
 
 app.use('/api', require('./api/register.js'));
+
+app.get('*', function(req, res) {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 var server = app.listen(process.env.PORT || 3000, function(){
   console.log('Server running on PORT: ', server.address().port);
