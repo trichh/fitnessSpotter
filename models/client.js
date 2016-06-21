@@ -1,8 +1,10 @@
+// Requiring packages
 var mongoose = require('../db.js');
 var shortid = require('shortid');
 
 var Schema = mongoose.Schema;
 
+// Configuring client collection
 var clientSchema = new Schema({
   _id: {
     type: String,
@@ -17,6 +19,7 @@ var clientSchema = new Schema({
   clientAssessment: String
 });
 
+// Making client collection accessible to other files
 var Client = mongoose.model("Client", clientSchema);
 
 module.exports = Client;

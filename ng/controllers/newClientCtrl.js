@@ -1,9 +1,11 @@
 angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope, $scope, $location, $http) {
+  // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
     if (!$scope.files) return;
     angular.forEach(files, function(file){
       if (file && !file.$error) {
+        // Configuring cloudinary api and specifying where to upload image
         file.upload = $upload.upload({
           url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
           data: {
@@ -13,7 +15,9 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope
           }
         }).success(function (data, status, headers, config) {
           file.result = data;
+          // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
+          // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
         }).error(function (data, status, headers, config) {
           // Sends error if any
@@ -23,7 +27,9 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope
     });
   }
 
+  // Function runs when users submit add client form
   $scope.addClient = function() {
+    // Grabbing new clients info from the input fields
     var fullName = $scope.fullName;
     var weight = $scope.weight;
     var profilePic = $scope.photo;
@@ -31,7 +37,9 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope
     var mealPlan = $scope.mealPlan;
     var clientAssessment = $scope.clientAssessment;
 
+    // Making post request to /api/add-client
     $http.post('/api/add-client', {
+      // Sends data to backend so we can insert this information into the database
       name: fullName,
       weight: weight,
       profilePicture: profilePic,

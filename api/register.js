@@ -1,8 +1,12 @@
+// Requiring packages
 var router = require('express').Router();
 var bodyParser = require('body-parser');
+
+// Requiring models
 var User = require('../models/user.js');
 var Client = require('../models/client.js');
 
+// When post request is made to /api/register save new user to database
 router.post('/register', function(req, res) {
   var trainer = new User({
     email: req.body.email,
@@ -16,7 +20,6 @@ router.post('/register', function(req, res) {
     securityCode: req.body.securityCode,
     month: req.body.month,
     year: req.body.year,
-    dateCreated: Date.now
   });
   trainer.save(function(err) {
     if(err) throw err;
@@ -24,6 +27,7 @@ router.post('/register', function(req, res) {
   });
 });
 
+// When post request is made to /api/add-client save new client to database
 router.post('/add-client', function(req, res) {
   var client = new Client({
     name: req.body.fullname,
@@ -40,10 +44,9 @@ router.post('/add-client', function(req, res) {
   });
 });
 
+// When get request is made to /api/dashboard find users data from database
 router.get('/dashboard', function(req, res) {
-  console.log("Looking for data in mongo");
   User.findOne({}, function(err, data) {
-    console.log("Data found in mongodb: ", data)
     res.json(data);
   });
 });
