@@ -15,19 +15,15 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
     })
-    .when('/dashboard', {
-      templateUrl: 'views/dashboard.html',
-      controller: 'DashboardCtrl'
-    })
     .when('/add-client', {
       templateUrl: 'views/addClient.html',
       controller: 'NewClientCtrl'
     })
-    // .when('/dashboard/:gym-name/admin', {
-    //   templateUrl: 'views/dashboard.html',
-    //   controller: 'LoginCtrl'
-    // })
-    .otherwise('/');
+    .when('/admin/:gymName/dashboard', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
+    .otherwise('/')
 })
 // Allows logout function to run
 .run(function($rootScope, $http){
