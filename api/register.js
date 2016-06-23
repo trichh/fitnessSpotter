@@ -46,9 +46,12 @@ router.post('/add-client', function(req, res) {
 
 // When get request is made to /api/dashboard find users data from database
 router.get('/dashboard', function(req, res) {
-  User.findOne({}, function(err, data) {
-    res.json(data);
-  });
+  // User.findOne({}, function(err, data) {
+  //   console.log(req.session);
+  //   res.json(data);
+  // });
+  console.log(req.session);
+  res.json(req.session);
 });
 
 module.exports = router;
