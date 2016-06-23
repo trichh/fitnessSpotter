@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var LocalStrategy = require('passport-local').Strategy;
+var MongoStore = require('connect-mongo')(session);
+var assert = require('assert');
 
 // Requiring user model to make sure email and password are correct when they log in
 var User = require('./models/user.js');
@@ -19,7 +21,6 @@ passport.use('login', new LocalStrategy({
 },
 function(req, email, password, done){
   process.nextTick(function(){
-    // Checking database to make sure email and password are both cottect
     User.findOne({'email': email, 'password': password}, function(err, user){
       if(user)
         return done(null, user);
@@ -66,11 +67,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Configuring Passport sessions
-app.use(session({
-  saveUninitialized: true,
-  secret: '00308118',
-  resave: true
-}));
+app.use(require('express-session')(
+  {
+    saveUninitialized: true,
+    secret: '00308118',
+    resave: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 1 Week
+    store: new MongoStore({mongooseConnection: mongoose.createConnection('mongodb://localhost/fitnessSpotter_sessions')})
+  }
+));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -85,7 +91,7 @@ app.get('/logout', function(req, res) {
 
 // After username and password are correct authenticate user
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
-  res.redirect('/dashboard/' + req.user.gymName);
+  res.redirect('/dashboard');
   // console.log(req.user);
 });
 
