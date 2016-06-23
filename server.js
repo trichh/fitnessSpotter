@@ -91,8 +91,7 @@ app.get('/logout', function(req, res) {
 
 // After username and password are correct authenticate user
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
-  res.redirect('/dashboard');
-  // console.log(req.user);
+  res.json(req.session);
 });
 
 // Use file that handles database calls and routes

@@ -17,19 +17,15 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
     })
-    .when('/dashboard', {
-      templateUrl: 'views/dashboard.html',
-      controller: 'DashboardCtrl'
-    })
     .when('/add-client', {
       templateUrl: 'views/addClient.html',
       controller: 'NewClientCtrl'
     })
-    // .when('/dashboard/:gym-name/admin', {
-    //   templateUrl: 'views/dashboard.html',
-    //   controller: 'LoginCtrl'
-    // })
-    .otherwise('/');
+    .when('/admin/:gymName/dashboard', {
+      templateUrl: 'views/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
+    .otherwise('/')
 }])
 // Allows logout function to run
 .run(["$rootScope", "$http", function($rootScope, $http){
@@ -70,8 +66,9 @@ angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope"
     })
     .success(function(data) {
       // If successful redirect to dashboard
-      $location.path('/dashboard');
-      console.log('Authentication successful!');
+      var gymName = data.passport.user.gymName;
+      $location.path('/admin/' + gymName + '/dashboard');
+      console.log('Authentication successful!', data.passport.user);
     })
     .error(function(err) {
       // If any errors redirect back to homepage

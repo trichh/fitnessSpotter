@@ -13,8 +13,9 @@ angular.module('fitnessSpotter').controller('LoginCtrl', function($rootScope, $s
     })
     .success(function(data) {
       // If successful redirect to dashboard
-      $location.path('/dashboard');
-      console.log('Authentication successful!');
+      var gymName = data.passport.user.gymName;
+      $location.path('/admin/' + gymName + '/dashboard');
+      console.log('Authentication successful!', data.passport.user);
     })
     .error(function(err) {
       // If any errors redirect back to homepage
