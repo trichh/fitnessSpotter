@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($rootScope, $scope, $location, $http, $upload, cloudinary) {
+angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;

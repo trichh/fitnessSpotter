@@ -95,7 +95,7 @@ app.post('/api/login', passport.authenticate('login'), function(req, res) {
 });
 
 // Use file that handles database calls and routes
-app.use('/api', require('./api/register.js'));
+app.use('/api', require('./api/routes.js'));
 
 // Send index.html on any route
 app.get('*', function(req, res) {
