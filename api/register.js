@@ -29,7 +29,9 @@ router.post('/register', function(req, res) {
 
 // When post request is made to /api/add-client save new client to database
 router.post('/add-client', function(req, res) {
+  console.log('Users Id', req.session.passport.user)
   var client = new Client({
+    trainerId: req.session.passport.user._id,
     name: req.body.fullname,
     weight: req.body.weight,
     profilePicture: req.body.profilePic,

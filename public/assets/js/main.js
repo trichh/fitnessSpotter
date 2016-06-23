@@ -67,8 +67,9 @@ angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope"
     .success(function(data) {
       // If successful redirect to dashboard
       var gymName = data.passport.user.gymName;
+      gymName = gymName.replace(/\s+/g, '-').toLowerCase();
       $location.path('/admin/' + gymName + '/dashboard');
-      console.log('Authentication successful!', data.passport.user);
+      console.log('Authentication successful!');
     })
     .error(function(err) {
       // If any errors redirect back to homepage
@@ -78,7 +79,7 @@ angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope"
   }
 }]);
 
-angular.module('fitnessSpotter').controller('NewClientCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
+angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($rootScope, $scope, $location, $http, $upload, cloudinary) {
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
