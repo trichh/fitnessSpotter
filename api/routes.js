@@ -29,12 +29,11 @@ router.post('/register', function(req, res) {
 
 // When post request is made to /api/add-client save new client to database
 router.post('/add-client', function(req, res) {
-  console.log('Users Id', req.session.passport.user)
   var client = new Client({
     trainerId: req.session.passport.user._id,
-    name: req.body.fullname,
+    name: req.body.name,
     weight: req.body.weight,
-    profilePicture: req.body.profilePic,
+    profilePicture: req.body.profilePicture,
     workoutPlan: req.body.workoutPlan,
     mealPlan: req.body.mealPlan,
     clientAssessment: req.body.clientAssessment,
@@ -48,7 +47,13 @@ router.post('/add-client', function(req, res) {
 
 // When get request is made to /api/dashboard find users data from database
 router.get('/dashboard', function(req, res) {
-  res.json(req.session);
+  console.log(req.session.passport.user._id);
+  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
+    res.json({
+      data: data,
+      sessions: req.session
+    });
+  })
 });
 
 module.exports = router;
