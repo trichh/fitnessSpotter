@@ -17,17 +17,10 @@
     <h2>{{gymName}}</h2>
   </article>
   <article id="clients">
-    <article class="client">
-      <img src={{client1Picture}} alt="Client Photo" />
+    <article class="client" ng-repeat="client in clients">
+      <img src={{client.profilePicture}} alt="Client Photo" />
       <ul>
-        <li>{{client1Name}}</li>
-        <li><a href="#">View Profile</a></p>
-      </ul>
-    </article>
-    <article class="client">
-      <img src={{client2Picture}} alt="Client Photo" />
-      <ul>
-        <li>{{client2Name}}</li>
+        <li>{{client.name}}</li>
         <li><a href="#">View Profile</a></p>
       </ul>
     </article>
