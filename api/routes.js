@@ -47,11 +47,10 @@ router.post('/add-client', function(req, res) {
 
 // When get request is made to /api/dashboard find users data from database
 router.get('/dashboard', function(req, res) {
-  console.log(req.session.passport.user._id);
   Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
     res.json({
-      data: data,
-      sessions: req.session
+      clientData: data,
+      sessionData: req.session
     });
   })
 });
