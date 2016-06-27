@@ -21,6 +21,7 @@ passport.use('login', new LocalStrategy({
 },
 function(req, email, password, done){
   process.nextTick(function(){
+    //Checking database to see if email and password are correct
     User.findOne({'email': email, 'password': password}, function(err, user){
       if(user)
         return done(null, user);
@@ -56,7 +57,7 @@ function isLoggedIn(req, res, next) {
 }
 
 // Redirects user to dashboard if they are authenticated
-app.get('/dashboard', isLoggedIn, function(req, res) {
+app.get('/admin/:gymName/dashboard', isLoggedIn, function(req, res) {
   res.render('./public/assets/views/dashboard.html', {
     user : req.user
   });
@@ -77,6 +78,7 @@ app.use(require('express-session')(
   }
 ));
 
+// Initialize user and start sesison
 app.use(passport.initialize());
 app.use(passport.session());
 
