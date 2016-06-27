@@ -12,7 +12,7 @@ angular.module('fitnessSpotter').controller('LoginCtrl', function($rootScope, $s
       password: password
     })
     .success(function(data) {
-      // If successful redirect to dashboard
+      // If successful redirect to users dashboard
       var gymName = data.passport.user.gymName;
       gymName = gymName.replace(/\s+/g, '-').toLowerCase();
       $location.path('/admin/' + gymName + '/dashboard');

@@ -312,36 +312,39 @@ section#login div form button {
 }
 section#dashboard article#gym {
   margin: 0 auto;
-  width: 458px;
+  max-width: 400px;
 }
 section#dashboard article#gym img {
   border-radius: 50%;
-  height: 175px;
-  margin-right: 50px;
-  width: 175px;
+  display: block;
+  height: 200px;
+  margin: 0 auto;;
+  width: 200px;
 }
 section#dashboard article#gym h2 {
   color: white;
-  display: inline;
   font-size: 45px;
+  margin: 0 auto;
+  padding: 15px 0;
   width: 228px;
-}
-section#dashboard article#clients article.client img {
-  border-radius: 50%;
-  height: 175px;
-  margin-left: 50px;
-  width: 175px;
 }
 section#dashboard article#clients article.client {
   margin-bottom: 30px;
 }
+section#dashboard article#clients article.client img {
+  border-radius: 50%;
+  display: block;
+  height: 200px;
+  margin: 0 auto;;
+  width: 200px;
+}
 section#dashboard article#clients article.client ul {
-  display: inline;
-  float: right;
+  display: inline-block;
   list-style-type: none;
-  margin: 60px 995px 0 0;
+  margin-left: 30px;
 }
 section#dashboard article#clients article.client ul li {
+  display: block;
   color: white;
   font-size: 30px;
   margin: 0;
@@ -411,6 +414,27 @@ section#newClient form button {
 @media screen and (min-width: 490px) {
   header nav {
     margin-right: 30px;
+  }
+  section#dashboard article#gym {
+    max-width: 458px;
+  }
+  section#dashboard article#gym img {
+    display: inline;
+    height: 175px;
+    margin-right: 50px;
+    width: 175px;
+  }
+  section#dashboard article#gym h2 {
+    display: inline;
+  }
+  section#dashboard article#clients article.client img {
+    display: inline;
+    height: 175px;
+    margin-left: 30px;
+    width: 175px;
+  }
+  section#dashboard article#clients article.client ul {
+    margin: 0;
   }
 }
 @media screen and (min-width: 595px) {
