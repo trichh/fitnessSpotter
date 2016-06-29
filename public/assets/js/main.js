@@ -25,6 +25,10 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardCtrl'
     })
+    .when('/admin/:gymName/:clientId/profile', {
+      templateUrl: 'views/profile.html',
+      controller: 'ProfileCtrl'
+    })
     .otherwise('/')
 }])
 // Allows logout function to run
@@ -141,6 +145,27 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$locati
       console.log('COMING BACK: ', data);
     })
   }
+}]);
+
+angular.module('fitnessSpotter').controller('ProfileCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+  // Get request to /api/profile
+  $http.get('/api/profile')
+  .then(function(data) {
+    // Data coming back
+    console.log("CLIENT DATA:", data.data.clientData);
+
+    // Making scope variable to clientData array to use ng-repeat to loop through it
+    $scope.clients = data.data.clientData;
+
+    // Making scope variable to users gymName to set up link
+    var gymName = data.data.sessionData.passport.user.gymName;
+    gymName = gymName.replace(/\s+/g, '-').toLowerCase();
+    $scope.dashboardRoute = gymName;
+  })
+  .catch(function(err) {
+    // If any errors console log error
+    console.log(err);
+  })
 }]);
 
 angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {

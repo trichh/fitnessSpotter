@@ -310,18 +310,18 @@ section#login div form button {
   margin: 20px 0;
   padding: 5px 10px;
 }
-section#dashboard article#gym {
+section#dashboard article#gym, section#profile article#clientHeader {
   margin: 0 auto;
   max-width: 400px;
 }
-section#dashboard article#gym img {
+section#dashboard article#gym img, section#profile article#clientHeader img {
   border-radius: 50%;
   display: block;
   height: 200px;
   margin: 0 auto;;
   width: 200px;
 }
-section#dashboard article#gym h2 {
+section#dashboard article#gym h2, section#profile article#clientHeader h2 {
   color: white;
   font-size: 45px;
   margin: 0 auto;
@@ -360,11 +360,13 @@ section#newClient h2 {
 section#newClient form {
   margin-left: 38px;
 }
-section#newClient form h3 {
+section#newClient form h3, section#profile article#clientInfo h3 {
   border-bottom: solid 1px white;
   color: white;
-  font-size: 25px;
   width: 350px;
+}
+section#newClient form h3 {
+  font-size: 25px;
 }
 section#newClient form label {
   color: white;
@@ -400,6 +402,30 @@ section#newClient form button {
   margin: 20px 0;
   padding: 5px 10px;
 }
+section#profile article#clientInfo {
+  margin-left: 38px;
+}
+section#profile article#clientInfo h3 {
+  font-size: 30px;
+}
+section#profile article#clientInfo p {
+  font-size: 25px;
+}
+section#profile article#clientInfo a {
+  background-color: #2B00FF;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px 15px;
+  text-decoration: none;;
+}
+
+
+
+
+
+
 
 
 
@@ -415,16 +441,16 @@ section#newClient form button {
   header nav {
     margin-right: 30px;
   }
-  section#dashboard article#gym {
+  section#dashboard article#gym, section#profile article#clientHeader {
     max-width: 458px;
   }
-  section#dashboard article#gym img {
+  section#dashboard article#gym img, section#profile article#clientHeader img {
     display: inline;
     height: 175px;
     margin-right: 50px;
     width: 175px;
   }
-  section#dashboard article#gym h2 {
+  section#dashboard article#gym h2, section#profile article#clientHeader h2 {
     display: inline;
   }
   section#dashboard article#clients article.client img {
@@ -456,7 +482,7 @@ section#newClient form button {
   section#login div form a {
     margin: 0 184px 0 50px;
   }
-  section#newClient form h3 {
+  section#newClient form h3, section#profile article#clientInfo h3 {
     width: 558px;
   }
 }

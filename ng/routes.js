@@ -23,6 +23,10 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardCtrl'
     })
+    .when('/admin/:gymName/:clientId/profile', {
+      templateUrl: 'views/profile.html',
+      controller: 'ProfileCtrl'
+    })
     .otherwise('/')
 })
 // Allows logout function to run
