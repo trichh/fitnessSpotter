@@ -1,4 +1,4 @@
-<section id="newClient">
+<section id="editClient">
   <header>
     <a href="/admin/{{dashboardRoute}}/dashboard"><h1>Fitness Spotter</h1></a>
     <nav >
@@ -12,8 +12,8 @@
       </ul>
     </nav>
   </header>
-  <h2>Add a new client</h2>
-  <form ng-submit="addClient()">
+  <h2>Edit client info</h2>
+  <form ng-submit="editClient()">
     <h3>Client info</h3>
     <label>Full name</label>
     <input type="text" name="fullName" ng-model="fullName" />
@@ -28,6 +28,6 @@
     <input type="text" name="mealPlan" ng-model="mealPlan" />
     <label>Client assessment</label>
     <input type="text" name="assessment" ng-model="clientAssessment" />
-    <button type="submit">Submit</button>
+    <button type="submit">Save</button>
   </form>
 </section>
