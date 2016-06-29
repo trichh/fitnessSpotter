@@ -23,9 +23,15 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardCtrl'
     })
+    .when('/admin/:gymName/edit', {
+      templateUrl: 'views/editUser.html'
+    })
     .when('/admin/:gymName/:clientId/profile', {
       templateUrl: 'views/profile.html',
       controller: 'ProfileCtrl'
+    })
+    .when('/admin/:gymName/:clientId/edit', {
+      templateUrl: 'views/editClient.html'
     })
     .otherwise('/')
 })

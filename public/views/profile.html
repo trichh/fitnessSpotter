@@ -7,7 +7,7 @@
         <li><a href="/admin/{{dashboardRoute}}/dashboard">Dashboard</a></li>
         <li><a href="/add-client">Add client</a></li>
         <li><a href="#">Leaderboard</a></li>
-        <li><a href="#">Edit info</a></li>
+        <li><a href="/admin/{{dashboardRoute}}/edit">Edit info</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
     </nav>
@@ -20,15 +20,15 @@
     <article id="clientInfo">
       <h3>Workout plan</h3>
       <p>{{client.workoutPlan}}</p>
-      <a href="#">Edit</a>
+      <a href="/admin/{{dashboardRoute}}/{{client._id}}/edit">Edit</a>
       <h3>Meal plan</h3>
       <p>{{client.mealPlan}}</p>
-      <a href="#">Edit</a>
+      <a href="/admin/{{dashboardRoute}}/{{client._id}}/edit">Edit</a>
       <h3>Client assessment</h3>
       <p>{{client.clientAssessment}}</p>
-      <a href="#">Edit</a>
+      <a href="/admin/{{dashboardRoute}}/{{client._id}}/edit">Edit</a>
       <h3>Progress graph</h3>
-      <a href="#">Edit</a>
+      <a href="/admin/{{dashboardRoute}}/{{client._id}}/edit">Edit</a>
     </article>
   </section>
 </section>
