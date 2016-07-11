@@ -57,4 +57,40 @@ router.get('/dashboard', function(req, res) {
   })
 });
 
+// When get request is made to /api/add-client find clients data from database and send then send that data and the session data
+router.get('/add-client', function(req, res) {
+  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
+    res.json({
+      sessionData: req.session
+    });
+  })
+});
+
+// When get request is made to /api/editUser find clients data from database and send then send that data and the session data
+router.get('/editUser', function(req, res) {
+  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
+    res.json({
+      sessionData: req.session
+    });
+  })
+});
+
+// When get request is made to /api/profile find clients data from database and send then send that data and the session data
+router.get('/profile', function(req, res) {
+  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
+    res.json({
+      sessionData: req.session
+    });
+  })
+});
+
+// When get request is made to /api/editClient find clients data from database and send then send that data and the session data
+router.get('/editClient', function(req, res) {
+  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
+    res.json({
+      sessionData: req.session
+    });
+  })
+});
+
 module.exports = router;

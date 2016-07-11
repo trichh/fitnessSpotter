@@ -1,8 +1,7 @@
-angular.module('fitnessSpotter').controller('ProfileCtrl', function($scope, $location, $http) {
-  // Get request to /api/profile
-  $http.get('/api/profile')
+angular.module('fitnessSpotter').controller('EditUserCtrl', function($scope, $location, $http) {
+  // Get request to /api/editUser
+  $http.get('/api/editUser')
   .then(function(data) {
-    // Data coming back
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
@@ -11,5 +10,5 @@ angular.module('fitnessSpotter').controller('ProfileCtrl', function($scope, $loc
   .catch(function(err) {
     // If any errors console log error
     console.log(err);
-  })
+  });
 });

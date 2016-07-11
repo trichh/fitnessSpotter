@@ -15,7 +15,7 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
     })
-    .when('/add-client', {
+    .when('/admin/:gymName/add-client', {
       templateUrl: 'views/addClient.html',
       controller: 'NewClientCtrl'
     })
@@ -24,14 +24,16 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
       controller: 'DashboardCtrl'
     })
     .when('/admin/:gymName/edit', {
-      templateUrl: 'views/editUser.html'
+      templateUrl: 'views/editUser.html',
+      controller: 'EditUserCtrl'
     })
     .when('/admin/:gymName/:clientId/profile', {
       templateUrl: 'views/profile.html',
       controller: 'ProfileCtrl'
     })
     .when('/admin/:gymName/:clientId/edit', {
-      templateUrl: 'views/editClient.html'
+      templateUrl: 'views/editClient.html',
+      controller: 'EditClientCtrl'
     })
     .otherwise('/')
 })
