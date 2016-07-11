@@ -17,7 +17,7 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl'
     })
-    .when('/add-client', {
+    .when('/admin/:gymName/add-client', {
       templateUrl: 'views/addClient.html',
       controller: 'NewClientCtrl'
     })
@@ -26,14 +26,16 @@ angular.module('fitnessSpotter').config(["$routeProvider", "$locationProvider", 
       controller: 'DashboardCtrl'
     })
     .when('/admin/:gymName/edit', {
-      templateUrl: 'views/editUser.html'
+      templateUrl: 'views/editUser.html',
+      controller: 'EditUserCtrl'
     })
     .when('/admin/:gymName/:clientId/profile', {
       templateUrl: 'views/profile.html',
       controller: 'ProfileCtrl'
     })
     .when('/admin/:gymName/:clientId/edit', {
-      templateUrl: 'views/editClient.html'
+      templateUrl: 'views/editClient.html',
+      controller: 'EditClientCtrl'
     })
     .otherwise('/')
 }])
@@ -70,6 +72,36 @@ angular.module('fitnessSpotter').controller('DashboardCtrl', ["$scope", "$locati
   })
 }]);
 
+angular.module('fitnessSpotter').controller('EditClientCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+  // Get request to /api/editClient
+  $http.get('/api/editClient')
+  .then(function(data) {
+    // Making scope variable to users gymName to set up link
+    var gymName = data.data.sessionData.passport.user.gymName;
+    gymName = gymName.replace(/\s+/g, '-').toLowerCase();
+    $scope.dashboardRoute = gymName;
+  })
+  .catch(function(err) {
+    // If any errors console log error
+    console.log(err);
+  });
+}]);
+
+angular.module('fitnessSpotter').controller('EditUserCtrl', ["$scope", "$location", "$http", function($scope, $location, $http) {
+  // Get request to /api/editUser
+  $http.get('/api/editUser')
+  .then(function(data) {
+    // Making scope variable to users gymName to set up link
+    var gymName = data.data.sessionData.passport.user.gymName;
+    gymName = gymName.replace(/\s+/g, '-').toLowerCase();
+    $scope.dashboardRoute = gymName;
+  })
+  .catch(function(err) {
+    // If any errors console log error
+    console.log(err);
+  });
+}]);
+
 angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope", "$location", "$http", function($rootScope, $scope, $location, $http) {
   // Function runs when users submit login form
   $scope.login = function() {
@@ -99,6 +131,19 @@ angular.module('fitnessSpotter').controller('LoginCtrl', ["$rootScope", "$scope"
 }]);
 
 angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
+  // Get request to /api/add-client
+  $http.get('/api/add-client')
+  .then(function(data) {
+    // Making scope variable to users gymName to set up link
+    var gymName = data.data.sessionData.passport.user.gymName;
+    gymName = gymName.replace(/\s+/g, '-').toLowerCase();
+    $scope.dashboardRoute = gymName;
+  })
+  .catch(function(err) {
+    // If any errors console log error
+    console.log(err);
+  });
+
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
@@ -158,11 +203,6 @@ angular.module('fitnessSpotter').controller('ProfileCtrl', ["$scope", "$location
   $http.get('/api/profile')
   .then(function(data) {
     // Data coming back
-    console.log("CLIENT DATA:", data.data.clientData);
-
-    // Making scope variable to clientData array to use ng-repeat to loop through it
-    $scope.clients = data.data.clientData;
-
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();

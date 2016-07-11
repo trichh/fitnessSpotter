@@ -1,4 +1,17 @@
 angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
+  // Get request to /api/add-client
+  $http.get('/api/add-client')
+  .then(function(data) {
+    // Making scope variable to users gymName to set up link
+    var gymName = data.data.sessionData.passport.user.gymName;
+    gymName = gymName.replace(/\s+/g, '-').toLowerCase();
+    $scope.dashboardRoute = gymName;
+  })
+  .catch(function(err) {
+    // If any errors console log error
+    console.log(err);
+  });
+
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
