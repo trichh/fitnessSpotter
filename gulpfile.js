@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var nodemon = require('gulp-nodemon');
 var ngAnnotate = require('gulp-ng-annotate');
 var wiredep = require('wiredep').stream;
+var uglify = require('gulp-uglify');
 
 // Gulp task that starts and runs server
 gulp.task('server', function() {
@@ -29,6 +30,7 @@ gulp.task('js:build', function() {
   ])
   .pipe(ngAnnotate())
   .pipe(concat('./main.js'))
+  .pipe(uglify())
   .pipe(gulp.dest('./public/assets/js/'));
 });
 
