@@ -10,8 +10,15 @@ var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(session);
 var assert = require('assert');
 
-// Requiring user model to make sure email and password are correct when they log in
+// Requiring user model and client model
 var User = require('./models/user.js');
+var Client = require('./models/client.js');
+
+// Running express
+var app = express();
+
+// Connecting to database
+mongoose.createConnection('mongodb://localhost/fitnessSpotter');
 
 // Defining login strategy to use
 passport.use('login', new LocalStrategy({
@@ -42,10 +49,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(user, done) {
     done(null, user);
 });
-
-var app = express();
-
-mongoose.createConnection('mongodb://localhost/fitnessSpotter');
 
 // Function makes sure user is authenticated
 function isLoggedIn(req, res, next) {
@@ -85,19 +88,28 @@ app.use(passport.session());
 // Use everything inside of public folder
 app.use(express.static('public'));
 
-// On logout route, log user out and end session
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.send(200);
-});
+// Use file that handles database calls and routes
+app.use('/api', require('./api/routes.js'));
 
 // After username and password are correct authenticate user
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.json(req.session);
 });
 
-// Use file that handles database calls and routes
-app.use('/api', require('./api/routes.js'));
+// URL Parameter to find unique client's data
+app.get('/admin/:gymName/:clientId/profile', isLoggedIn, function(req, res) {
+  console.log("URL PARAMETER:", req.params.clientId);
+  Client.find({_id: req.params.clientId}, function(err, data) {
+    console.log("FOUND DATA", data);
+  })
+});
+
+// On logout route, log user out and end session
+app.get('/logout', function(req, res) {
+  req.logout();
+  req.session.destroy();
+  res.redirect("/");
+});
 
 // Send index.html on any route
 app.get('*', function(req, res) {

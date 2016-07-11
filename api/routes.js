@@ -57,24 +57,4 @@ router.get('/dashboard', function(req, res) {
   })
 });
 
-router.get('/admin/:gymName/:clientId/profile', function(req, res) {
-  console.log(req.params.clientId);
-  Client.find({trainerId : req.session.passport.user._id, _id: req.params.clientId}, function(err, data) {
-    res.json({
-      clientData: data,
-      sessionData: req.session
-    });
-  })
-})
-
-// When get request is made to /api/dashboard find clients data from database and send then send that data and the session data
-router.get('/profile', function(req, res) {
-  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
-    res.json({
-      clientData: data,
-      sessionData: req.session
-    });
-  })
-});
-
 module.exports = router;
