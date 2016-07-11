@@ -213,33 +213,33 @@ section#contact article.contactList div.contact:last-of-type p:last-of-type::bef
   color: transparent;
   content: "img";
 }
-section#register h2, section#newClient h2, section#editUser h2 {
+section#register h2, section#newClient h2, section#editUser h2, section#editClient h2 {
   color: white;
   font-size: 40px;
   margin-left: 38px;
 }
-section#register form, section#newClient form, section#editUser form {
+section#register form, section#newClient form, section#editUser form, section#editClient form {
   margin-left: 38px;
 }
-section#register form h3, section#newClient form h3, section#profile article#clientInfo h3, section#editUser h3 {
+section#register form h3, section#newClient form h3, section#profile article#clientInfo h3, section#editUser form h3, section#editClient form h3 {
   border-bottom: solid 1px white;
   color: white;
   font-size: 25px;
   width: 350px;
 }
-section#register form label, section#editUser form label {
+section#register form label, section#editUser form label, section#editClient form label {
   color: white;
   display: block;
   font-size: 23px;
   padding-bottom: 5px;
 }
-section#register form input[type="text"], section#register form input[type="password"], section#editUser form input[type="text"], section#editUser form input[type="password"] {
+section#register form input[type="text"], section#register form input[type="password"], section#editUser form input[type="text"], section#editUser form input[type="password"], section#editClient form input[type="text"], section#editClient form input[type="password"] {
   border-radius: 2px;
   height: 25px;
   margin-bottom: 10px;
   width: 279px;
 }
-section#register form a, section#editUser form a {
+section#register form a, section#editUser form a, section#editClient form a {
   background-color: #4AE012;
   border-radius: 2px;
   color: black;
@@ -251,13 +251,13 @@ section#register form a, section#editUser form a {
   text-decoration: none;
   width: 90px;
 }
-section#register form input[type="radio"], section#editUser form input[type="radio"] {
+section#register form input[type="radio"], section#editUser form input[type="radio"], section#editClient form input[type="radio"] {
   margin-left: 130px;
 }
-section#register form select, section#editUser form select {
+section#register form select, section#editUser form select, section#editClient form select {
   width: 125px;
 }
-section#register form button, section#editUser form button {
+section#register form button, section#editUser form button, section#editClient form button {
   background-color: #4AE012;
   border: solid 0px black;
   border-radius: 2px;
@@ -467,7 +467,7 @@ section#profile article#clientInfo a {
   section#cta article h2 {
     font-size: 45px;
   }
-  section#register form h3, section#editUser form h3 {
+  section#register form h3, section#editUser form h3, section#editClient form h3 {
     width: 558px;
   }
   section#login div {
