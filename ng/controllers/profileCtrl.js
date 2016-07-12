@@ -1,4 +1,16 @@
 angular.module('fitnessSpotter').controller('ProfileCtrl', function($scope, $location, $http) {
+  // Forcing page to reload to hack bug lol
+  window.location.reload(true);
+  // $http.get('/admin/:gymName/:clientId/profile')
+  // .then(function(data) {
+  //   // Data coming back
+  //   console.log("FINALLY GOT DATA", data);
+  // })
+  // .catch(function(err) {
+  //   // If any errors console log error
+  //   console.log(err);
+  // });
+
   // Get request to /api/profile
   $http.get('/api/profile')
   .then(function(data) {

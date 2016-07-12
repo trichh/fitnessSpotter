@@ -97,11 +97,12 @@ app.post('/api/login', passport.authenticate('login'), function(req, res) {
 });
 
 // URL Parameter to find unique client's data
-app.get('/admin/:gymName/:clientId/profile', isLoggedIn, function(req, res) {
+app.get('/admin/:gymName/:clientId/profile', function(req, res) {
   console.log("URL PARAMETER:", req.params.clientId);
   Client.find({_id: req.params.clientId}, function(err, data) {
     console.log("FOUND DATA", data);
-  })
+    res.send(data[0]);
+  });
 });
 
 // On logout route, log user out and end session
