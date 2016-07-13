@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', '$q', function($scope, $location, $http, $upload, cloudinary, $q) {
+angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', '$q', '$routeParams', function($scope, $location, $http, $upload, cloudinary, $q, $routeParams) {
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
 
@@ -45,7 +45,9 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$locat
 
   $scope.editClient = function() {
     // Get request to /api/editClient
-    $http.get('/api/editClient')
+    $http.get('/api/editClient', {
+      params: {gymName: $routeParams.gymName, clientId: $routeParams.clientId}
+    })
     .then(function(data) {
       $scope.oldName = data.data.clientData[0].name;
       $scope.oldWeight = data.data.clientData[0].weight;
@@ -95,6 +97,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$locat
       // Making post request to /api/updateClient
       $http.post('/api/updateClient', {
         // Sends data to backend so we can insert this information into the database
+        _id: $routeParams.clientId,
         name: fullName,
         weight: weight,
         profilePicture: profilePic,

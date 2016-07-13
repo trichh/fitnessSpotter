@@ -57,7 +57,7 @@ router.post('/updateUser', function(req, res) {
 });
 
 router.post('/updateClient', function(req, res) {
-  Client.findOneAndUpdate({_id: 'B1mEdClU'}, {$set: {trainerId: req.session.passport.user._id, name: req.body.name, weight: req.body.weight, profilePicture: req.body.profilePicture, workoutPlan: req.body.workoutPlan, mealPlan: req.body.mealPlan, clientAssessment: req.body.clientAssessment}}, {new: true}, function(err, data) {
+  Client.findOneAndUpdate({_id: req.body._id}, {$set: {trainerId: req.session.passport.user._id, name: req.body.name, weight: req.body.weight, profilePicture: req.body.profilePicture, workoutPlan: req.body.workoutPlan, mealPlan: req.body.mealPlan, clientAssessment: req.body.clientAssessment}}, {new: true}, function(err, data) {
     if(err) {
       console.log("ERROR:", err);
     }
@@ -114,7 +114,7 @@ router.get('/clientData', function(req, res) {
 
 // When get request is made to /api/editClient find clients data from database and send then send that data and the session data
 router.get('/editClient', function(req, res) {
-  Client.find({trainerId : req.session.passport.user._id, _id: 'B1mEdClU'}, function(err, data) {
+  Client.find({_id: req.query.clientId}, function(err, data) {
     res.json({
       sessionData: req.session,
       clientData: data
