@@ -415,7 +415,13 @@ section#profile article#clientInfo a {
   cursor: pointer;
   font-size: 20px;
   padding: 5px 15px;
-  text-decoration: none;;
+  text-decoration: none;
+}
+section#profile article#clientInfo a#delete {
+  background-color: red;
+  display: block;
+  margin: 30px 0;
+  width: 65px;
 }
 
 
