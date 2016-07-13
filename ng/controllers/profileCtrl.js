@@ -23,5 +23,17 @@ angular.module('fitnessSpotter').controller('ProfileCtrl', function($scope, $loc
   .catch(function(err) {
     // If any errors console log error
     console.log(err);
-  })
+  });
+
+  $scope.delete = function() {
+    $http.get('/api/deleteClient', {
+      params: {gymName: $routeParams.gymName, clientId: $routeParams.clientId}
+    })
+    .then(function(data) {
+      console.log("CLIENT DELETED", data);
+    })
+    .catch(function(err) {
+      console.log(err);
+    })
+  }
 });

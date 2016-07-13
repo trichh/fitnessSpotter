@@ -357,6 +357,18 @@ section#newClient h2 {
   font-size: 40px;
   margin-left: 38px;
 }
+section#editUser a#delete {
+  background-color: red;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  margin-left: 38px;
+  padding: 5px 15px;
+  text-decoration: none;
+  width: 65px;
+}
 section#newClient form h3, section#profile article#clientInfo h3 {
   border-bottom: solid 1px white;
   color: white;
@@ -415,7 +427,13 @@ section#profile article#clientInfo a {
   cursor: pointer;
   font-size: 20px;
   padding: 5px 15px;
-  text-decoration: none;;
+  text-decoration: none;
+}
+section#profile article#clientInfo a#delete {
+  background-color: red;
+  display: block;
+  margin: 30px 0;
+  width: 65px;
 }
 
 
