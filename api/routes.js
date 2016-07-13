@@ -102,6 +102,16 @@ router.get('/profile', function(req, res) {
   })
 });
 
+// URL Parameter to find unique client's data
+router.get('/clientData', function(req, res) {
+  Client.find({_id: req.query.clientId}, function(err, data) {
+    console.log("FOUND DATA", data);
+    res.json({
+      clientData: data
+    })
+  });
+});
+
 // When get request is made to /api/editClient find clients data from database and send then send that data and the session data
 router.get('/editClient', function(req, res) {
   Client.find({trainerId : req.session.passport.user._id, _id: 'B1mEdClU'}, function(err, data) {
