@@ -47,6 +47,16 @@ router.post('/add-client', function(req, res) {
   });
 });
 
+// When post request is made to /api/register save new user to database
+router.post('/updateUser', function(req, res) {
+  User.findOneAndUpdate({_id: req.session.passport.user._id}, {$set: {email: req.body.email, password: req.body.password, gymName: req.body.gymName, profilePicture: req.body.profilePicture, phoneNumber: req.body.phoneNumber, paymentPlan: req.body.paymentPlan, cardHolder: req.body.cardHolder, cardNumber: req.body.cardNumber, securityCode: req.body.securityCode, month: req.body.month, year: req.body.year}}, {new: true}, function(err, data) {
+    if(err) {
+      console.log("ERROR:", err);
+    }
+    console.log("UPDATED DATA", data);
+  })
+});
+
 // When get request is made to /api/dashboard find clients data from database and send then send that data and the session data
 router.get('/dashboard', function(req, res) {
   Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
