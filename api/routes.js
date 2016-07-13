@@ -38,8 +38,7 @@ router.post('/add-client', function(req, res) {
     profilePicture: req.body.profilePicture,
     workoutPlan: req.body.workoutPlan,
     mealPlan: req.body.mealPlan,
-    clientAssessment: req.body.clientAssessment,
-    dateCreated: Date.now
+    clientAssessment: req.body.clientAssessment
   });
   client.save(function(err) {
     if(err) throw err;
@@ -50,6 +49,15 @@ router.post('/add-client', function(req, res) {
 // When post request is made to /api/register save new user to database
 router.post('/updateUser', function(req, res) {
   User.findOneAndUpdate({_id: req.session.passport.user._id}, {$set: {email: req.body.email, password: req.body.password, gymName: req.body.gymName, profilePicture: req.body.profilePicture, phoneNumber: req.body.phoneNumber, paymentPlan: req.body.paymentPlan, cardHolder: req.body.cardHolder, cardNumber: req.body.cardNumber, securityCode: req.body.securityCode, month: req.body.month, year: req.body.year}}, {new: true}, function(err, data) {
+    if(err) {
+      console.log("ERROR:", err);
+    }
+    console.log("UPDATED DATA", data);
+  })
+});
+
+router.post('/updateClient', function(req, res) {
+  Client.findOneAndUpdate({_id: 'B1mEdClU'}, {$set: {trainerId: req.session.passport.user._id, name: req.body.name, weight: req.body.weight, profilePicture: req.body.profilePicture, workoutPlan: req.body.workoutPlan, mealPlan: req.body.mealPlan, clientAssessment: req.body.clientAssessment}}, {new: true}, function(err, data) {
     if(err) {
       console.log("ERROR:", err);
     }
@@ -96,9 +104,10 @@ router.get('/profile', function(req, res) {
 
 // When get request is made to /api/editClient find clients data from database and send then send that data and the session data
 router.get('/editClient', function(req, res) {
-  Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
+  Client.find({trainerId : req.session.passport.user._id, _id: 'B1mEdClU'}, function(err, data) {
     res.json({
-      sessionData: req.session
+      sessionData: req.session,
+      clientData: data
     });
   })
 });
