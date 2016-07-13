@@ -127,4 +127,9 @@ router.get('/deleteClient', function(req, res) {
   Client.find({_id: req.query.clientId}).remove().exec();
 });
 
+// When get request is made to /api/deleteUser find clients data from database and send then send that data and the session data
+router.get('/deleteUser', function(req, res) {
+  User.find({_id: req.session.passport.user._id}).remove().exec();
+});
+
 module.exports = router;

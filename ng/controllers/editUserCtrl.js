@@ -152,4 +152,14 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$locatio
       });
     });
   }
+
+  $scope.delete = function() {
+    $http.get('/api/deleteUser')
+    .then(function(data) {
+      console.log("CLIENT DELETED", data);
+    })
+    .catch(function(err) {
+      console.log(err);
+    })
+  }
 }]);
