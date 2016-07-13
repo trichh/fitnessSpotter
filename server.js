@@ -10,9 +10,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(session);
 var assert = require('assert');
 
-// Requiring user model and client model
+// Requiring user model model
 var User = require('./models/user.js');
-var Client = require('./models/client.js');
 
 // Running express
 var app = express();
@@ -94,15 +93,6 @@ app.use('/api', require('./api/routes.js'));
 // After username and password are correct authenticate user
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.json(req.session);
-});
-
-// URL Parameter to find unique client's data
-app.get('/admin/:gymName/:clientId/profile', function(req, res) {
-  console.log("URL PARAMETER:", req.params.clientId);
-  Client.find({_id: req.params.clientId}, function(err, data) {
-    console.log("FOUND DATA", data);
-    res.send(data[0]);
-  });
 });
 
 // On logout route, log user out and end session
