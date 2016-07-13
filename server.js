@@ -10,6 +10,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(session);
 var assert = require('assert');
 
+var port = process.env.PORT || 3000;
+
 // Requiring user model model
 var User = require('./models/user.js');
 
@@ -108,6 +110,6 @@ app.get('*', function(req, res) {
 });
 
 // Start server
-var server = app.listen(process.env.PORT || 3000, function(){
+var server = app.listen(port, function(){
   console.log('Server running on PORT: ', server.address().port);
 });
