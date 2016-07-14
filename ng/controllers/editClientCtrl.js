@@ -1,34 +1,6 @@
-angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', '$q', '$routeParams', function($scope, $location, $http, $upload, cloudinary, $q, $routeParams) {
+angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$location', '$http', '$q', '$routeParams', function($scope, $location, $http, $q, $routeParams) {
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
-
-  // Function that uploads image to cloudinary
-  $scope.uploadImage = function(files){
-    $scope.files = files;
-    if (!$scope.files) return;
-    angular.forEach(files, function(file){
-      if (file && !file.$error) {
-        // Configuring cloudinary api and specifying where to upload image
-        file.upload = $upload.upload({
-          url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-          data: {
-            upload_preset: cloudinary.config().upload_preset,
-            tags: 'myphotoalbum',
-            file: file
-          }
-        }).success(function (data, status, headers, config) {
-          file.result = data;
-          // Set variable to the image url where cloudinary is hosting it
-          var imageUrl = data.url;
-          // Set scope variable to previous variable that has the image url in order to send it with post request
-          $scope.photo = imageUrl;
-        }).error(function (data, status, headers, config) {
-          // Sends error if any
-          file.result = data;
-        });
-      }
-    });
-  }
 
   // Get request to /api/editClient
   $http.get('/api/editClient')

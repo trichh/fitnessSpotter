@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', '$q', function($scope, $location, $http, $upload, cloudinary, $q) {
+angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$location', '$http', '$q', function($scope, $location, $http, $q) {
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
 
