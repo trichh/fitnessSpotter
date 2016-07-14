@@ -5,8 +5,7 @@
   "main": "index.js",
   "cacheDirectories": ["node_modules", "public/lib"],
   "scripts": {
-    "start": "gulp",
-    "postinstall": "bower install"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
