@@ -19,7 +19,7 @@ var User = require('./models/user.js');
 var app = express();
 
 // Connecting to database
-mongoose.createConnection('mongodb://localhost/fitnessSpotter');
+mongoose.createConnection(process.env.MONGODB_URI);
 
 // Defining login strategy to use
 passport.use('login', new LocalStrategy({
@@ -78,7 +78,7 @@ app.use(require('express-session')(
     secret: '00308118',
     resave: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 1 Week
-    store: new MongoStore({mongooseConnection: mongoose.createConnection('mongodb://localhost/fitnessSpotter_sessions')})
+    store: new MongoStore({mongooseConnection: mongoose.createConnection(process.env.MONGODB_URI)})
   }
 ));
 

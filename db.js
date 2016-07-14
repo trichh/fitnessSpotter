@@ -2,6 +2,6 @@
 var mongoose = require('mongoose');
 
 // Making database connection
-mongoose.connect('mongodb://localhost/fitnessSpotter');
+mongoose.connect(process.env.MONGODB_URI);
 
 module.exports = mongoose;

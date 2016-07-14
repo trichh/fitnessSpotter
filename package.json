@@ -5,7 +5,7 @@
   "main": "index.js",
   "cacheDirectories": ["node_modules", "public/lib"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp",
     "postinstall": "bower install"
   },
   "repository": {
