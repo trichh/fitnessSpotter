@@ -28,6 +28,7 @@
     "assert": "1.4.1",
     "body-parser": "1.15.1",
     "bower": "1.7.9",
+    "cloudinary": "1.4.1",
     "connect-mongo": "1.2.1",
     "cookie-parser": "1.4.3",
     "express": "4.13.4",
