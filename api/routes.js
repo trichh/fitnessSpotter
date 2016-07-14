@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var router = require('express').Router();
 var bodyParser = require('body-parser');
+var cloudinary = require('cloudinary');
 
 // Requiring models
 var User = require('../models/user.js');
