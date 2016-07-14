@@ -5,7 +5,8 @@
   "main": "index.js",
   "cacheDirectories": ["node_modules", "public/lib"],
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "heroku-prebuild": "bower install",
   },
   "repository": {
     "type": "git",
