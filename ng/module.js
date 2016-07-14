@@ -1,1 +1,1 @@
-var fitnessSpotter = angular.module('fitnessSpotter', ['ngRoute', 'ngAnimate', 'cloudinary', 'ngFileUpload'])
+var fitnessSpotter = angular.module('fitnessSpotter', ['ngRoute', 'ngAnimate', 'ngFileUpload'])
