@@ -2,6 +2,7 @@
 var mongoose = require('../db.js');
 var shortid = require('shortid');
 
+// Creating new schema
 var Schema = mongoose.Schema;
 
 // Configuring user collection

@@ -16,10 +16,10 @@ var User = require('./models/user.js');
 // Running express
 var app = express();
 
-// Connecting to database
+// Connecting to local database
 mongoose.createConnection('mongodb://localhost/fitnessSpotter');
 
-// Defining login strategy to use
+// Defining login strategy to use with passport
 passport.use('login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -28,16 +28,19 @@ passport.use('login', new LocalStrategy({
 function(req, email, password, done){
   process.nextTick(function(){
     //Checking database to see if email and password are correct
-    User.findOne({'email': email, 'password': password}, function(err, user){
-      if(user)
-        return done(null, user);
-      if(err)
+    User.findOne({'email': email, 'password': password}, function(err, data) {
+      if(data) {
+        return done(null, data);
+      }
+
+      if(err) {
         return err;
+      } else {
       return false;
+      }
     });
   });
-}
-));
+}));
 
 // Serializes user instance from a session store in order to support login sessions
 passport.serializeUser(function(user, done) {
@@ -49,13 +52,15 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-// Function makes sure user is authenticated
+// Function that makes sure user is logged in and authenticated
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated())
-    // If user is authenticated continue
+  if (req.isAuthenticated()) {
+    // If the user is authenticated from logging in continue
     return next();
-  // If user isn't authenticated redirect to homepage
-  res.redirect('/');
+  } else {
+    // If the user isn't authenticated and tries to hit specified route redirect them back to homepage
+    res.redirect('/');
+  }
 }
 
 // Redirects user to dashboard if they are authenticated
@@ -65,32 +70,35 @@ app.get('/admin/:gymName/dashboard', isLoggedIn, function(req, res) {
   });
 });
 
+// Parses cookie headers
 app.use(cookieParser());
+
+// Parses incoming requests under the req.body property
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Configuring Passport sessions
-app.use(require('express-session')(
+app.use(session(
   {
     saveUninitialized: true,
     secret: '00308118',
     resave: true,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 1 Week
-    store: new MongoStore({mongooseConnection: mongoose.createConnection('mongodb://localhost/fitnessSpotter_sessions')})
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 1 }, // 1 Day
+    store: new MongoStore({mongooseConnection: mongoose.createConnection('mongodb://localhost/fitnessSpotter_sessions')}) // Store session data
   }
 ));
 
-// Initialize user and start sesison
+// Initializes user and starts sesison
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Use everything inside of public folder
+// Uses everything inside of public folder
 app.use(express.static('public'));
 
-// Use file that handles database calls and routes
+// Use file that handles database calls and api routes
 app.use('/api', require('./api/routes.js'));
 
-// After username and password are correct authenticate user
+// After user submits login form and the username and password are correct authenticate them
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.json(req.session);
 });

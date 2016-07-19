@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$location', '$http', 'Upload', 'cloudinary', function($scope, $location, $http, $upload, cloudinary) {
+angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$http', 'Upload', 'cloudinary', function($scope, $http, $upload, cloudinary) {
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
@@ -43,7 +43,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     var securityCode = $scope.securityCode;
     var month = $scope.month;
     var year = $scope.year;
-
+    // Determining what plan the user selected
     if(typeof basic !== undefined && plus === undefined && premium === undefined) {
       // If user selects basic plan set plan variable to basic
       var plan = basic;
@@ -54,7 +54,6 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
       // If user selects premium plan set plan variable to premium
       var plan = premium;
     }
-
     // Making post request to /api/register
     $http.post('/api/register', {
       // Sends data to backend so we can insert this information into the database
@@ -73,7 +72,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     .then(function(data) {
       console.log('COMING BACK: ', data);
     })
-
+    // Setting inputs back to empty
     $scope.email = '';
     $scope.password = '';
     $scope.name = '';
