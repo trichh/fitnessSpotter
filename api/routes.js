@@ -135,19 +135,26 @@ router.get('/deleteUser', function(req, res) {
   User.find({_id: req.session.passport.user._id}).remove().exec();
 });
 
-// When get request is made to /api/deleteUser find clients data from database and send then send that data and the session data
+// When get request is made to /api/clientDashboard find clients data from database and send then send that data and the session data
 router.get('/clientDashboard', function(req, res) {
   Client.find({gymName: req.query.gymName}, function(err, data) {
     res.json({clientData: data});
   });
 });
 
-// When get request is made to /api/deleteUser find clients data from database and send then send that data and the session data
+// When get request is made to /api/trainerInfo find clients data from database and send then send that data and the session data
 router.get('/trainerInfo', function(req, res) {
   var paramName = req.query.gymName;
   paramName = paramName.replace(/-/g, ' ').toUpperCase();
   User.find({gymName: paramName}, function(err, data) {
     res.json({trainerData: data});
+  });
+});
+
+// When get request is made to /api/clientProfile find clients data from database and send then send that data and the session data
+router.get('/clientProfile', function(req, res) {
+  Client.find({_id: req.query.clientId}, function(err, data) {
+    res.json({clientData: data});
   });
 });
 

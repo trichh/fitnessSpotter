@@ -1,0 +1,25 @@
+<section id="profile">
+  <header>
+    <a href="/"><h1>Fitness Spotter</h1></a>
+    <nav >
+      <ul>
+        <li><a href="#">Menu</a></li>
+        <li><a href="/{{dashboardRoute}}/dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+  <section id="clientList" ng-repeat="client in clients">
+    <article id="clientHeader">
+      <img src={{client.profilePicture}} alt="Client Photo" />
+      <h2>{{client.name}}</h2>
+    </article>
+    <article id="clientInfo">
+      <h3>Workout plan</h3>
+      <p>{{client.workoutPlan}}</p>
+      <h3>Meal plan</h3>
+      <p>{{client.mealPlan}}</p>
+      <h3>Client assessment</h3>
+      <p>{{client.clientAssessment}}</p>
+    </article>
+  </section>
+</section>
