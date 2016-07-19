@@ -18,7 +18,7 @@ router.post('/register', function(req, res) {
     email: req.body.email,
     password: req.body.password,
     gymName: req.body.gymName,
-    profilePicture: req.body.profilePicture,
+    profilePicture: req.files,
     phoneNumber: req.body.phoneNumber,
     paymentPlan: req.body.paymentPlan,
     cardHolder: req.body.cardHolder,
