@@ -11,6 +11,7 @@ var clientSchema = new Schema({
     'default': shortid.generate
   },
   trainerId: String,
+  gymName: String,
   name: String,
   weight: String,
   profilePicture: String,

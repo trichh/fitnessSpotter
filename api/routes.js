@@ -13,7 +13,7 @@ router.post('/register', function(req, res) {
   var trainer = new User({
     email: req.body.email,
     password: req.body.password,
-    gymName: req.body.gymName,
+    gymName: req.body.gymName.toUpperCase(),
     profilePicture: req.body.profilePicture,
     phoneNumber: req.body.phoneNumber,
     paymentPlan: req.body.paymentPlan,
@@ -31,8 +31,11 @@ router.post('/register', function(req, res) {
 
 // When post request is made to /api/add-client save new client to database
 router.post('/add-client', function(req, res) {
+  var gymName = req.session.passport.user.gymName;
+  gymName = gymName.replace(/\s+/g, '-').toLowerCase();
   var client = new Client({
     trainerId: req.session.passport.user._id,
+    gymName: gymName,
     name: req.body.name,
     weight: req.body.weight,
     profilePicture: req.body.profilePicture,
@@ -130,6 +133,22 @@ router.get('/deleteClient', function(req, res) {
 // When get request is made to /api/deleteUser find clients data from database and send then send that data and the session data
 router.get('/deleteUser', function(req, res) {
   User.find({_id: req.session.passport.user._id}).remove().exec();
+});
+
+// When get request is made to /api/deleteUser find clients data from database and send then send that data and the session data
+router.get('/clientDashboard', function(req, res) {
+  Client.find({gymName: req.query.gymName}, function(err, data) {
+    res.json({clientData: data});
+  });
+});
+
+// When get request is made to /api/deleteUser find clients data from database and send then send that data and the session data
+router.get('/trainerInfo', function(req, res) {
+  var paramName = req.query.gymName;
+  paramName = paramName.replace(/-/g, ' ').toUpperCase();
+  User.find({gymName: paramName}, function(err, data) {
+    res.json({trainerData: data});
+  });
 });
 
 module.exports = router;
