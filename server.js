@@ -105,7 +105,7 @@ app.post('/uploadImage', function(req, res) {
     var picturePath = files.picture[0].path;
     console.log("FILES:", picturePath);
     cloudinary.uploader.upload(picturePath, function(result) {
-      console.log(result.url);
+      res.json(result.url);
     });
   });
 });
