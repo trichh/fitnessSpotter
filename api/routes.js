@@ -11,14 +11,14 @@ var Client = require('../models/client.js');
 
 // When post request is made to /api/register save new user to database
 router.post('/register', function(req, res) {
-  cloudinary.uploader.upload(req.files.profilePhoto.path, function(result) {
+  cloudinary.uploader.upload(req.body.profilePicture, function(result) {
     console.log(result.url);
   });
   var trainer = new User({
     email: req.body.email,
     password: req.body.password,
     gymName: req.body.gymName,
-    profilePicture: req.files.profilePhoto.path,
+    profilePicture: req.body.profilePicture,
     phoneNumber: req.body.phoneNumber,
     paymentPlan: req.body.paymentPlan,
     cardHolder: req.body.cardHolder,
