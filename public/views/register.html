@@ -14,7 +14,7 @@
     </nav>
   </header>
   <h2>Subscribe to Fitness Spotter</h2>
-  <form ng-submit="register()">
+  <form method="post" action="/api/register" enctype="multipart/form-data" ng-submit="register()">
     <h3>Account info</h3>
     <label>Email</label>
     <input type="text" name="email" ng-model="email" />
@@ -23,7 +23,7 @@
     <label>Your name/gym name</label>
     <input type="text" name="name" ng-model="name" />
     <label>Profile picture</label>
-    <input type="file" id="profilePhoto" />
+    <input type="file" id="profilePhoto" name="picture" />
     <label>Phone number</label>
     <input type="text" name="number" ng-model="number" />
     <h3>Payment info</h3>
