@@ -9,7 +9,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
         var file = selectedFile[i];
         console.log("FILE:", file);
         console.log("FILE NAME", file.name);
-        $scope.photo = file;
+        $scope.photo = file.name;
         i++;
     }
   }
