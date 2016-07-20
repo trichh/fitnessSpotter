@@ -26,6 +26,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     var name = $scope.name;
     var profilePic = $scope.photo;
     var pic = $scope.pic;
+    console.log("NEW PIC", pic);
     var number = $scope.number;
     var basic = $scope.basic;
     var plus = $scope.plus;
