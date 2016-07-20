@@ -9,7 +9,8 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
         var file = selectedFile[i];
         console.log("FILE:", file);
         console.log("FILE NAME", file.name);
-        $scope.photo = file.name;
+        $scope.photo = file;
+        $scope.photoName = file.name;
         i++;
     }
   }
@@ -24,6 +25,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
     var password = $scope.password;
     var name = $scope.name;
     var profilePic = $scope.photo;
+    var picName = $scope.photoName
     var number = $scope.number;
     var basic = $scope.basic;
     var plus = $scope.plus;
@@ -52,6 +54,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
       password: password,
       gymName: name,
       profilePicture: profilePic,
+      picName: picName
       phoneNumber: number,
       paymentPlan: plan,
       cardHolder: cardName,
