@@ -11,7 +11,7 @@ var Client = require('../models/client.js');
 
 // When post request is made to /api/register save new user to database
 router.post('/register', function(req, res) {
-  cloudinary.uploader.upload(req.body.profilePicture, function(result) {
+  cloudinary.uploader.upload("https://scontent.ftpa1-1.fna.fbcdn.net/v/t1.0-1/p320x320/12187793_1124252024252438_9185279239102940060_n.jpg?oh=07fc3b22aa7b175f2fee35ef23a7c9c5&oe=582E6EC3", function(result) {
     console.log(result.url);
     var imageUrl = result.url;
     var trainer = new User({
