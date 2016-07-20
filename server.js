@@ -105,7 +105,24 @@ app.post('/uploadImage', function(req, res) {
     var picturePath = files.picture[0].path;
     console.log("FILES:", picturePath);
     cloudinary.uploader.upload(picturePath, function(result) {
-      console.log(result.url);
+      var imageUrl = result.url;
+      var trainer = new User({
+        email: req.body.email,
+        password: req.body.password,
+        gymName: req.body.gymName,
+        profilePicture: imageUrl,
+        phoneNumber: req.body.phoneNumber,
+        paymentPlan: req.body.paymentPlan,
+        cardHolder: req.body.cardHolder,
+        cardNumber: req.body.cardNumber,
+        securityCode: req.body.securityCode,
+        month: req.body.month,
+        year: req.body.year,
+      });
+      trainer.save(function(err) {
+        if(err) throw err;
+        console.log("New trainer saved succesfully");
+      });
     });
   });
 });
