@@ -3,6 +3,7 @@ var express = require('express');
 var app = express();
 var router = require('express').Router();
 var bodyParser = require('body-parser');
+var multiparty = require('multiparty');
 var cloudinary = require('cloudinary');
 
 // Requiring models
@@ -11,22 +12,29 @@ var Client = require('../models/client.js');
 
 // When post request is made to /api/register save new user to database
 router.post('/register', function(req, res) {
-    var trainer = new User({
-    email: req.body.email,
-    password: req.body.password,
-    gymName: req.body.gymName,
-    profilePicture: req.body.profilePicture,
-    phoneNumber: req.body.phoneNumber,
-    paymentPlan: req.body.paymentPlan,
-    cardHolder: req.body.cardHolder,
-    cardNumber: req.body.cardNumber,
-    securityCode: req.body.securityCode,
-    month: req.body.month,
-    year: req.body.year,
-  });
-  trainer.save(function(err) {
-    if(err) throw err;
-    console.log("New trainer saved succesfully");
+  var form = new multiparty.Form();
+  form.parse(req, function(err, fields, files) {
+    var picturePath = files.picture[0].path;
+    cloudinary.uploader.upload(picturePath, function(result) {
+      var imageUrl = result.url;
+      var trainer = new User({
+      email: req.body.email,
+      password: req.body.password,
+      gymName: req.body.gymName,
+      profilePicture: imageUrl,
+      phoneNumber: req.body.phoneNumber,
+      paymentPlan: req.body.paymentPlan,
+      cardHolder: req.body.cardHolder,
+      cardNumber: req.body.cardNumber,
+      securityCode: req.body.securityCode,
+      month: req.body.month,
+      year: req.body.year,
+      });
+      trainer.save(function(err) {
+        if(err) throw err;
+        console.log("New trainer saved succesfully");
+      });
+    });
   });
 });
 
