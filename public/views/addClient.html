@@ -12,15 +12,14 @@
     </nav>
   </header>
   <h2>Add a new client</h2>
-  <form ng-submit="addClient()">
+  <form method="post" action="/uploadImage" enctype="multipart/form-data" ng-submit="addClient()">
     <h3>Client info</h3>
     <label>Full name</label>
     <input type="text" name="fullName" ng-model="fullName" />
     <label>Body weight</label>
     <input type="text" name="weight" ng-model="weight" />
     <label>Profile picture</label>
-    <input type="text" name="picture" value="" ng-model="picture" />
-    <a href="#" ngf-select="uploadImage($files)">Upload</a>
+    <input type="file" id="profilePhoto" name="picture"/>
     <label>Workout Plan</label>
     <input type="text" name="workoutPlan" ng-model="workoutPlan" />
     <label>Meal plan</label>

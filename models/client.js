@@ -2,6 +2,7 @@
 var mongoose = require('../db.js');
 var shortid = require('shortid');
 
+// Creating new schema
 var Schema = mongoose.Schema;
 
 // Configuring client collection
@@ -11,6 +12,7 @@ var clientSchema = new Schema({
     'default': shortid.generate
   },
   trainerId: String,
+  gymName: String,
   name: String,
   weight: String,
   profilePicture: String,

@@ -1,69 +1,52 @@
-angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$location', '$http', '$q', function($scope, $location, $http, $q) {
+angular.module('fitnessSpotter').controller('EditUserCtrl', function($scope, $http, $q) {
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
-
-  // Function that uploads image to cloudinary
-  $scope.uploadImage = function(files){
-    $scope.files = files;
-    if (!$scope.files) return;
-    angular.forEach(files, function(file){
-      if (file && !file.$error) {
-        // Configuring cloudinary api and specifying where to upload image
-        file.upload = $upload.upload({
-          url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-          data: {
-            upload_preset: cloudinary.config().upload_preset,
-            tags: 'myphotoalbum',
-            file: file
-          }
-        }).success(function (data, status, headers, config) {
-          file.result = data;
-          // Set variable to the image url where cloudinary is hosting it
-          var imageUrl = data.url;
-          // Set scope variable to previous variable that has the image url in order to send it with post request
-          $scope.photo = imageUrl;
-        }).error(function (data, status, headers, config) {
-          // Sends error if any
-          file.result = data;
-        });
-      }
-    });
-  }
-
-  // Get request to /api/editUser
-  $http.get('/api/editUser')
+  // Get request to /api/getGym to get users current data
+  $http.get('/api/getGym')
   .then(function(data) {
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
     $scope.dashboardRoute = gymName;
+    // Making scope variables to users old data just in case they don't update any of the fields
+    $scope.oldEmail = data.data.sessionData.passport.user.email;
+    $scope.oldPassword = data.data.sessionData.passport.user.password;
+    $scope.oldName = data.data.sessionData.passport.user.gymName;
+    $scope.oldProfilePic = data.data.sessionData.passport.user.profilePicture;
+    $scope.oldNumber = data.data.sessionData.passport.user.phoneNumber;
+    $scope.oldPlan = data.data.sessionData.passport.user.paymentPlan;
+    $scope.oldCardName = data.data.sessionData.passport.user.cardHolder;
+    $scope.oldCardNumber = data.data.sessionData.passport.user.cardNumber;
+    $scope.oldSecurityCode = data.data.sessionData.passport.user.securityCode;
+    $scope.oldMonth = data.data.sessionData.passport.user.month;
+    $scope.oldYear = data.data.sessionData.passport.user.year;
+    // Returns a promise of the passed value or promise
+    requestFinished.resolve();
   })
   .catch(function(err) {
     // If any errors console log error
     console.log(err);
   });
 
+  // Function that gets file uploaded
+  var getFiles= function() {
+    var selectedFile = document.getElementById('profilePhoto').files;
+    var fileListLength = selectedFile.length;
+    var i = 0;
+    // Loops through files uploaded
+    while ( i < fileListLength) {
+        var file = selectedFile[i];
+        console.log("FILE:", file);
+        console.log("FILE NAME", file.name);
+        $scope.photo = file.name;
+        i++;
+    }
+  }
+
+  // Updates file input when changed
+  document.getElementById('profilePhoto').onchange=getFiles;
+
   $scope.editUser = function() {
-    // Get request to /api/editUser
-    $http.get('/api/editUser')
-    .then(function(data) {
-      // Making scope variables to users old data just in case they don't update any of the fields
-      $scope.oldEmail = data.data.sessionData.passport.user.email;
-      $scope.oldPassword = data.data.sessionData.passport.user.password;
-      $scope.oldName = data.data.sessionData.passport.user.gymName;
-      $scope.oldProfilePic = data.data.sessionData.passport.user.profilePicture;
-      $scope.oldNumber = data.data.sessionData.passport.user.phoneNumber;
-      $scope.oldPlan = data.data.sessionData.passport.user.paymentPlan;
-      $scope.oldCardName = data.data.sessionData.passport.user.cardHolder;
-      $scope.oldCardNumber = data.data.sessionData.passport.user.cardNumber;
-      $scope.oldSecurityCode = data.data.sessionData.passport.user.securityCode;
-      $scope.oldMonth = data.data.sessionData.passport.user.month;
-      $scope.oldYear = data.data.sessionData.passport.user.year;
-
-      // Returns a promise of the passed value or promise
-      requestFinished.resolve();
-    })
-
     // Run functions asynchronously, and uses return values when it is done processing.
     requestFinished.promise.then(function() {
       // If statements to see if user updated the specific information or not. If they did, set variables that are being passed to backend equal to new data. If not set varialbes to old data.
@@ -92,6 +75,7 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$locatio
       } else if(typeof $scope.number !== undefined) {
         var number = $scope.number;
       }
+      // Determining what plan the user selected
       if($scope.basic === undefined && $scope.plus === undefined && $scope.premium === undefined) {
         var plan = $scope.oldPlan;
       } else if(typeof $scope.basic !== undefined || typeof $scope.plus !== undefined || typeof $scope.premium !== undefined) {
@@ -131,7 +115,6 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$locatio
       } else if(typeof $scope.year !== undefined) {
         var year = $scope.year;
       }
-
       // Making post request to /api/updateUser
       $http.post('/api/updateUser', {
         // Sends data to backend so we can insert this information into the database
@@ -153,13 +136,15 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$scope', '$locatio
     });
   }
 
+  // Function runs when user clicks delete button
   $scope.delete = function() {
+    // Get request to /api/deleteUser to remove user from database
     $http.get('/api/deleteUser')
     .then(function(data) {
-      console.log("CLIENT DELETED", data);
+      console.log("CLIENT DELETED");
     })
     .catch(function(err) {
       console.log(err);
     })
   }
-}]);
+});

@@ -12,7 +12,7 @@
     </nav>
   </header>
   <h2>Edit user info</h2>
-  <form ng-submit="editUser()">
+  <form method="post" action="/uploadImage" enctype="multipart/form-data" ng-submit="editUser()">
     <h3>Account info</h3>
     <label>Email</label>
     <input type="text" name="email" ng-model="email" />
@@ -21,8 +21,7 @@
     <label>Your name/gym name</label>
     <input type="text" name="name" ng-model="name" />
     <label>Profile picture</label>
-    <input type="text" name="picture" value="" ng-model="picture" />
-    <a href="#" ngf-select="uploadImage($files)">Upload</a>
+    <input type="file" id="profilePhoto" name="picture"/>
     <label>Phone number</label>
     <input type="text" name="number" ng-model="number" />
     <h3>Payment info</h3>
