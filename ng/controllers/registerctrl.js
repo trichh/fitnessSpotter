@@ -3,14 +3,13 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$locatio
   var getFiles= function() {
     var selectedFile = document.getElementById('profilePhoto').files;
     var fileListLength = selectedFile.length;
-    console.log("SELECTED FILE", selectedFile);
     var i = 0;
     // Loops through files uploaded
     while ( i < fileListLength) {
         var file = selectedFile[i];
         console.log("FILE:", file);
         console.log("FILE NAME", file.name);
-        $scope.photo = file;
+        $scope.photo = file.name;
         i++;
     }
   }
