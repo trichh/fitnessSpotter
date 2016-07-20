@@ -9,6 +9,8 @@ var cookieParser = require('cookie-parser');
 var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(session);
 var assert = require('assert');
+var multiparty = require('multiparty');
+var cloudinary = require('cloudinary');
 
 var port = process.env.PORT || 3000;
 
@@ -95,6 +97,17 @@ app.use('/api', require('./api/routes.js'));
 // After username and password are correct authenticate user
 app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.json(req.session);
+});
+
+app.post('/uploadImage', function(req, res) {
+  var form = new multiparty.Form();
+  form.parse(req, function(err, fields, files) {
+    var picturePath = files.picture[0].path;
+    console.log("FILES:", picturePath);
+    cloudinary.uploader.upload(picturePath, function(result) {
+      console.log(result.url);
+    });
+  });
 });
 
 // On logout route, log user out and end session
