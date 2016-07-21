@@ -45,7 +45,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', function($scope, $ht
       var plan = premium;
     }
     // Making post request to /api/register
-    $http.post('/uploadImage', {
+    $http.post('/api/register', {
       // Sends data to backend so we can insert this information into the database
       email: email,
       password: password,
