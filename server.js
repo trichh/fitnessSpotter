@@ -120,12 +120,7 @@ app.post('/uploadImage', function(req, res) {
           console.log("UPLOADED IMAGE TO DATABASE SUCCESFULLY");
         }
       })
-
-
-
-      res.json({
-        imageUrl: result.url
-      });
+      res.redirect("/");
     });
   });
 });
