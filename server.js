@@ -15,8 +15,9 @@ var cloudinary = require('cloudinary');
 // Making Port variable to run server on
 var port = process.env.PORT || 3000;
 
-// Requiring user model model
+// Requiring user and client models
 var User = require('./models/user.js');
+var Client = require('./models/client.js');
 
 // Running express
 var app = express();
@@ -106,14 +107,33 @@ app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.json(req.session);
 });
 
-// Uploads image to cloudinary
-app.post('/uploadImage', function(req, res) {
+// Uploads image to cloudinary and stores image url in database
+app.post('/uploadUserImage', function(req, res) {
   var form = new multiparty.Form();
   form.parse(req, function(err, fields, files) {
     var picturePath = files.picture[0].path;
     console.log("FILES:", picturePath);
     cloudinary.uploader.upload(picturePath, function(result) {
       User.findOneAndUpdate({}, {$set: {profilePicture: result.url}}, {new: true}, function(err, data) {
+        if(err) {
+          throw err;
+        } else {
+          console.log("UPLOADED IMAGE TO DATABASE SUCCESFULLY");
+        }
+      })
+      res.redirect("/");
+    });
+  });
+});
+
+// Uploads image to cloudinary and stores image url in database
+app.post('/uploadClientImage', function(req, res) {
+  var form = new multiparty.Form();
+  form.parse(req, function(err, fields, files) {
+    var picturePath = files.picture[0].path;
+    console.log("FILES:", picturePath);
+    cloudinary.uploader.upload(picturePath, function(result) {
+      Client.findOneAndUpdate({}, {$set: {profilePicture: result.url}}, {new: true}, function(err, data) {
         if(err) {
           throw err;
         } else {

@@ -42,7 +42,7 @@ router.post('/add-client', function(req, res) {
     gymName: gymName,
     name: req.body.name,
     weight: req.body.weight,
-    profilePicture: req.body.profilePicture,
+    profilePicture: null,
     workoutPlan: req.body.workoutPlan,
     mealPlan: req.body.mealPlan,
     clientAssessment: req.body.clientAssessment
