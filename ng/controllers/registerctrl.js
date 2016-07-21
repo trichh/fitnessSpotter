@@ -50,7 +50,6 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', function($scope, $ht
       email: email,
       password: password,
       gymName: name,
-      profilePicture: profilePic,
       phoneNumber: number,
       paymentPlan: plan,
       cardHolder: cardName,
