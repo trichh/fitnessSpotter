@@ -113,7 +113,7 @@ app.post('/uploadImage', function(req, res) {
     var picturePath = files.picture[0].path;
     console.log("FILES:", picturePath);
     cloudinary.uploader.upload(picturePath, function(result) {
-      User.findOneAndUpdate({_id: req.session.passport.user._id}, {$set: {profilePicture: result.url}}, {new: true}, function(err, data) {
+      User.findOneAndUpdate({}, {$set: {profilePicture: result.url}}, {new: true}, function(err, data) {
         if(err) {
           throw err;
         } else {
@@ -122,7 +122,7 @@ app.post('/uploadImage', function(req, res) {
       })
 
 
-      
+
       res.json({
         imageUrl: result.url
       });
