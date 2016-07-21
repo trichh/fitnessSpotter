@@ -2,8 +2,6 @@
 var express = require('express');
 var router = require('express').Router();
 var bodyParser = require('body-parser');
-var multiparty = require('multiparty');
-var cloudinary = require('cloudinary');
 
 // Requiring models
 var User = require('../models/user.js');
@@ -11,33 +9,26 @@ var Client = require('../models/client.js');
 
 // When post request is made to /api/register save new user to database
 router.post('/register', function(req, res) {
-  var form = new multiparty.Form();
-  form.parse(req, function(err, fields, files) {
-    var picturePath = files.picture[0].path;
-    console.log("FILES:", picturePath);
-    cloudinary.uploader.upload(picturePath, function(result) {
-      // Storing the gym name all uppercase to use route params later to find trainer info for the client dashboard
-      var trainer = new User({
-      email: req.body.email,
-      password: req.body.password,
-      gymName: req.body.gymName.toUpperCase(),
-      profilePicture: result.url,
-      phoneNumber: req.body.phoneNumber,
-      paymentPlan: req.body.paymentPlan,
-      cardHolder: req.body.cardHolder,
-      cardNumber: req.body.cardNumber,
-      securityCode: req.body.securityCode,
-      month: req.body.month,
-      year: req.body.year,
-      });
-      trainer.save(function(err) {
-        if(err) {
-          throw err;
-        } else {
-          console.log("New trainer saved succesfully");
-        }
-      });
-    });
+  // Storing the gym name all uppercase to use route params later to find trainer info for the client dashboard
+  var trainer = new User({
+  email: req.body.email,
+  password: req.body.password,
+  gymName: req.body.gymName.toUpperCase(),
+  profilePicture: req.body.profilePicture,
+  phoneNumber: req.body.phoneNumber,
+  paymentPlan: req.body.paymentPlan,
+  cardHolder: req.body.cardHolder,
+  cardNumber: req.body.cardNumber,
+  securityCode: req.body.securityCode,
+  month: req.body.month,
+  year: req.body.year,
+  });
+  trainer.save(function(err) {
+    if(err) {
+      throw err;
+    } else {
+      console.log("New trainer saved succesfully");
+    }
   });
 });
 
