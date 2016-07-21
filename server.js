@@ -113,6 +113,16 @@ app.post('/uploadImage', function(req, res) {
     var picturePath = files.picture[0].path;
     console.log("FILES:", picturePath);
     cloudinary.uploader.upload(picturePath, function(result) {
+      User.findOneAndUpdate({_id: req.session.passport.user._id}, {$set: {profilePicture: result.url}}, {new: true}, function(err, data) {
+        if(err) {
+          throw err;
+        } else {
+          console.log("UPLOADED IMAGE TO DATABASE SUCCESFULLY");
+        }
+      })
+
+
+      
       res.json({
         imageUrl: result.url
       });
