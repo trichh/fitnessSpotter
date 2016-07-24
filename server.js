@@ -63,9 +63,37 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-// Redirects user to dashboard if they are authenticated
+// Makes sure user is logged in and authenticated before user can access the dashboard
 app.get('/admin/:gymName/dashboard', isLoggedIn, function(req, res) {
   res.render('./public/assets/views/dashboard.html', {
+    user : req.user
+  });
+});
+
+// Makes sure user is logged in and authenticated before user can access the add-client page
+app.get('/admin/:gymName/add-client', isLoggedIn, function(req, res) {
+  res.render('./public/assets/views/addClient.html', {
+    user : req.user
+  });
+});
+
+// Makes sure user is logged in and authenticated before user can access the edit user page
+app.get('/admin/:gymName/edit', isLoggedIn, function(req, res) {
+  res.render('./public/assets/views/editUser.html', {
+    user : req.user
+  });
+});
+
+// Makes sure user is logged in and authenticated before user can access the admin client profile page
+app.get('/admin/:gymName/:clientId/profile', isLoggedIn, function(req, res) {
+  res.render('./public/assets/views/profile.html', {
+    user : req.user
+  });
+});
+
+// Makes sure user is logged in and authenticated before user can access the admin edit client page
+app.get('/admin/:gymName/:clientId/edit', isLoggedIn, function(req, res) {
+  res.render('./public/assets/views/editClient.html', {
     user : req.user
   });
 });
