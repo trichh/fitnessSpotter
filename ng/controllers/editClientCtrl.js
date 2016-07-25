@@ -2,7 +2,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', function($scope, $
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
   // Get request to /api/editClient to get clients current data
-  $http.get('/api/editClient', {
+  $http.get('/api/clientData', {
     params: {gymName: $routeParams.gymName, clientId: $routeParams.clientId}
   })
   .then(function(data) {
