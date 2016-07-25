@@ -37,3 +37,17 @@ Now that you have mongod and mongo running, start the server by pasting the foll
 ```
 $ gulp
 ```
+
+# Deployments
+Fitness Spotter Alpha Version
+```
+https://fitness-spotter-alpha.herokuapp.com/
+```
+Fitness Spotter Beta Version
+```
+https://fitness-spotter-beta.herokuapp.com/
+```
+Fitness Spotter Final Version
+```
+https://fitness-spotter.herokuapp.com/
+```
