@@ -138,7 +138,9 @@ app.post('/uploadClientImage', function(req, res) {
           console.log("UPLOADED IMAGE TO DATABASE SUCCESFULLY");
         }
       })
-      res.redirect("/" + req.session.passport.user.gymName + "/dashboard");
+      var gymName = req.session.passport.user.gymName;
+      gymName = gymName.replace(/\s+/g, '-').toLowerCase();
+      res.redirect("/admin/" + gymName + "/dashboard");
     });
   });
 });
