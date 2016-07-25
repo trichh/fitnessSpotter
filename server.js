@@ -1,6 +1,5 @@
 // Requiring packages
 var express = require('express');
-var path = require('path');
 var passport = require('passport');
 var mongoose = require('./db.js');
 var bodyParser = require('body-parser');
@@ -8,11 +7,10 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(session);
-var assert = require('assert');
 var multiparty = require('multiparty');
 var cloudinary = require('cloudinary');
 
-// Making Port variable to run server on
+// Making Port variable to run heroku server on
 var port = process.env.PORT || 3000;
 
 // Requiring user and client models
@@ -30,8 +28,7 @@ passport.use('login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
-},
-function(req, email, password, done){
+}, function(req, email, password, done){
   process.nextTick(function(){
     //Checking database to see if email and password are correct
     User.findOne({'email': email, 'password': password}, function(err, data) {
@@ -68,8 +65,8 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-// Redirects user to dashboard if they are authenticated
-app.get('/admin/:gymName/dashboard', isLoggedIn, function(req, res) {
+// Making sure user is logged in and authenticated before user can access any admin pages
+app.get('/admin/:gymName/*', isLoggedIn, function(req, res) {
   res.render('./public/assets/views/dashboard.html', {
     user : req.user
   });
@@ -77,6 +74,7 @@ app.get('/admin/:gymName/dashboard', isLoggedIn, function(req, res) {
 
 // Parses cookie headers
 app.use(cookieParser());
+
 // Parses incoming requests under the req.body property
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -99,7 +97,7 @@ app.use(passport.session());
 // Use everything inside of public folder
 app.use(express.static('public'));
 
-// Use file that handles database calls and routes
+// Use file that handles backend requests and database calls
 app.use('/api', require('./api/routes.js'));
 
 // After user submits login form and the username and password are correct authenticate them
@@ -107,7 +105,7 @@ app.post('/api/login', passport.authenticate('login'), function(req, res) {
   res.json(req.session);
 });
 
-// Uploads image to cloudinary and stores image url in database
+// Uploads image for the user to cloudinary and stores image url in database
 app.post('/uploadUserImage', function(req, res) {
   var form = new multiparty.Form();
   form.parse(req, function(err, fields, files) {
@@ -126,7 +124,7 @@ app.post('/uploadUserImage', function(req, res) {
   });
 });
 
-// Uploads image to cloudinary and stores image url in database
+// Uploads image for the client to cloudinary and stores image url in database
 app.post('/uploadClientImage', function(req, res) {
   var form = new multiparty.Form();
   form.parse(req, function(err, fields, files) {

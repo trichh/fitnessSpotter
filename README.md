@@ -39,14 +39,14 @@ $ gulp
 ```
 
 # Deployments
-Fitness Spotter Alpha Version
+Fitness Spotter Alpha Version:
 
 [https://fitness-spotter-alpha.herokuapp.com/](https://fitness-spotter-alpha.herokuapp.com/)
 
-Fitness Spotter Beta Version
+Fitness Spotter Beta Version:
 
 [https://fitness-spotter-beta.herokuapp.com/](https://fitness-spotter-beta.herokuapp.com/)
 
-Fitness Spotter Final Version
+Fitness Spotter Final Version:
 
 [https://fitness-spotter.herokuapp.com/](https://fitness-spotter.herokuapp.com/)
