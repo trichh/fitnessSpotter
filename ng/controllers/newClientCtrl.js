@@ -52,11 +52,5 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($scope, $h
     .then(function(data) {
       console.log('COMING BACK: ', data);
     })
-    $scope.fullName = '';
-    $scope.weight = '';
-    $scope.photo = '';
-    $scope.workoutPlan = '';
-    $scope.mealPlan = '';
-    $scope.clientAssessment = '';
   }
 });
