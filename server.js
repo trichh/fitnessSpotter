@@ -1,6 +1,5 @@
 // Requiring packages
 var express = require('express');
-var path = require('path');
 var passport = require('passport');
 var mongoose = require('./db.js');
 var bodyParser = require('body-parser');
@@ -8,9 +7,8 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(session);
-var assert = require('assert');
 
-// Requiring user model model
+// Requiring user model
 var User = require('./models/user.js');
 
 // Running express
@@ -24,15 +22,13 @@ passport.use('login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
-},
-function(req, email, password, done){
+}, function(req, email, password, done){
   process.nextTick(function(){
-    //Checking database to see if email and password are correct
+    //Checking database to make sure email and password are correct
     User.findOne({'email': email, 'password': password}, function(err, data) {
       if(data) {
         return done(null, data);
       }
-
       if(err) {
         return err;
       } else {
@@ -63,37 +59,9 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-// Makes sure user is logged in and authenticated before user can access the dashboard
-app.get('/admin/:gymName/dashboard', isLoggedIn, function(req, res) {
+// Making sure user is logged in and authenticated before user can access any admin pages
+app.get('/admin/:gymName/*', isLoggedIn, function(req, res) {
   res.render('./public/assets/views/dashboard.html', {
-    user : req.user
-  });
-});
-
-// Makes sure user is logged in and authenticated before user can access the add-client page
-app.get('/admin/:gymName/add-client', isLoggedIn, function(req, res) {
-  res.render('./public/assets/views/addClient.html', {
-    user : req.user
-  });
-});
-
-// Makes sure user is logged in and authenticated before user can access the edit user page
-app.get('/admin/:gymName/edit', isLoggedIn, function(req, res) {
-  res.render('./public/assets/views/editUser.html', {
-    user : req.user
-  });
-});
-
-// Makes sure user is logged in and authenticated before user can access the admin client profile page
-app.get('/admin/:gymName/:clientId/profile', isLoggedIn, function(req, res) {
-  res.render('./public/assets/views/profile.html', {
-    user : req.user
-  });
-});
-
-// Makes sure user is logged in and authenticated before user can access the admin edit client page
-app.get('/admin/:gymName/:clientId/edit', isLoggedIn, function(req, res) {
-  res.render('./public/assets/views/editClient.html', {
     user : req.user
   });
 });
@@ -123,7 +91,7 @@ app.use(passport.session());
 // Uses everything inside of public folder
 app.use(express.static('public'));
 
-// Use file that handles database calls and api routes
+// Use file that handles backend requests and database calls
 app.use('/api', require('./api/routes.js'));
 
 // After user submits login form and the username and password are correct authenticate them

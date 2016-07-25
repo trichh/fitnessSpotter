@@ -1,4 +1,8 @@
-angular.module('fitnessSpotter').controller('LoginCtrl', function($scope, $location, $http) {
+angular.module('fitnessSpotter').controller('LoginCtrl', function($scope, $rootScope, $location, $http) {
+  $rootScope.homeHeader = true;
+  document.getElementById('homeHeader').style.display = "block";
+  $rootScope.clientHeader = false;
+  
   // Function runs when users submit login form
   $scope.login = function() {
     // Grabbing users email and password from the email and password input fields

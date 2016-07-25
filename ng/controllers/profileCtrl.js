@@ -1,4 +1,6 @@
-angular.module('fitnessSpotter').controller('ProfileCtrl', function($scope, $http, $routeParams) {
+angular.module('fitnessSpotter').controller('ProfileCtrl', function($rootScope, $scope, $http, $routeParams) {
+  $rootScope.homeHeader = false;
+  
   // Get request to /api/clientData to get unique client's data and session data
   $http.get('/api/clientData', {
     params: {gymName: $routeParams.gymName, clientId: $routeParams.clientId}
@@ -8,7 +10,7 @@ angular.module('fitnessSpotter').controller('ProfileCtrl', function($scope, $htt
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
     // Making scope variable to an array of the clients data to loop through in views
     $scope.clients = data.data.clientData;
   })

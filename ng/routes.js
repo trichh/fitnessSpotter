@@ -5,7 +5,8 @@ angular.module('fitnessSpotter').config(function($routeProvider, $locationProvid
   // Specifying what controllers and views to use on what route
   $routeProvider
     .when('/', {
-      templateUrl: 'views/home.html'
+      templateUrl: 'views/home.html',
+      controller: 'HomeCtrl'
     })
     .when('/register', {
       templateUrl: 'views/register.html',

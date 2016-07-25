@@ -1,4 +1,5 @@
-angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$http', 'Upload', 'cloudinary', '$q', '$routeParams', function($scope, $http, $upload, cloudinary, $q, $routeParams) {
+angular.module('fitnessSpotter').controller('EditClientCtrl', ['$rootScope', '$scope', '$http', 'Upload', 'cloudinary', '$q', '$routeParams', function($rootScope, $scope, $http, $upload, cloudinary, $q, $routeParams) {
+  $rootScope.homeHeader = false;
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
   // Get request to /api/editClient to get clients current data
@@ -9,7 +10,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$scope', '$http'
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
     // Making scope variables to current data in case user doesn't update this information
     $scope.oldName = data.data.clientData[0].name;
     $scope.oldWeight = data.data.clientData[0].weight;

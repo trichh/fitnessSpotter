@@ -39,5 +39,5 @@ gulp.task('js:watch', ['js:build'], function () {
   gulp.watch('./ng/**/*.js', ['js:build'])
 });
 
-// When you run gulp in terminal it runs all gulp tasks
+// When you run gulp in terminal it runs all gulp tasks by default or you can run a specific task by typing gulp taskName
 gulp.task('default', ['js:watch', 'bower','server']);

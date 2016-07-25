@@ -1,4 +1,5 @@
-angular.module('fitnessSpotter').controller('DashboardCtrl', function($scope, $http) {
+angular.module('fitnessSpotter').controller('DashboardCtrl', function($rootScope, $scope, $http) {
+  $rootScope.homeHeader = false;
   // Get request to /api/dashboard to get list of clients for specific gym or trainer and also session data
   $http.get('/api/dashboard')
   .then(function(data) {
@@ -13,7 +14,7 @@ angular.module('fitnessSpotter').controller('DashboardCtrl', function($scope, $h
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
   })
   .catch(function(err) {
     // If any errors console log error

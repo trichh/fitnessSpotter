@@ -1,4 +1,8 @@
-angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$http', 'Upload', 'cloudinary', function($scope, $http, $upload, cloudinary) {
+angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$rootScope', '$http', 'Upload', 'cloudinary', function($scope, $rootScope, $http, $upload, cloudinary) {
+  $rootScope.homeHeader = true;
+  document.getElementById('homeHeader').style.display = "block";
+  $rootScope.clientHeader = false;
+  
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;

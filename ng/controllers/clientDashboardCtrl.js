@@ -1,4 +1,7 @@
-angular.module('fitnessSpotter').controller('ClientDashboardCtrl', function($scope, $http, $routeParams) {
+angular.module('fitnessSpotter').controller('ClientDashboardCtrl', function($rootScope, $scope, $http, $routeParams) {
+  $rootScope.homeHeader = true;
+  $rootScope.hide = true;
+  $rootScope.clientHeader = true;
   // Get request to /api/clientDashboard to get list of clients for specific gym or trainer
   $http.get('/api/clientDashboard', {
     params: {gymName: $routeParams.gymName}
@@ -6,7 +9,7 @@ angular.module('fitnessSpotter').controller('ClientDashboardCtrl', function($sco
   .then(function(data) {
     console.log("CLIENTS DATA:", data.data.clientData);
     // Making scope variable to users gymName to set up link
-    $scope.dashboardRoute = $routeParams.gymName;
+    $rootScope.dashboardRoute = $routeParams.gymName;
     // Making scope variable to an array of the clients data to loop through in views
     $scope.clients = data.data.clientData;
   })

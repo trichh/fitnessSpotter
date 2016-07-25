@@ -1,16 +1,4 @@
 <section id="profile">
-  <header>
-    <a href="/admin/{{dashboardRoute}}/dashboard"><h1>Fitness Spotter</h1></a>
-    <nav >
-      <ul>
-        <li><a href="#">Menu</a></li>
-        <li><a href="/admin/{{dashboardRoute}}/dashboard">Dashboard</a></li>
-        <li><a href="/admin/{{dashboardRoute}}/add-client">Add client</a></li>
-        <li><a href="/admin/{{dashboardRoute}}/edit">Edit info</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
   <section id="clientList" ng-repeat="client in clients">
     <article id="clientHeader">
       <img src={{client.profilePicture}} alt="Client Photo" />

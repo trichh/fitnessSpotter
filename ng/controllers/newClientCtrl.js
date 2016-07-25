@@ -1,11 +1,12 @@
-angular.module('fitnessSpotter').controller('NewClientCtrl', ['$scope', '$http', 'Upload', 'cloudinary', function($scope, $http, $upload, cloudinary) {
+angular.module('fitnessSpotter').controller('NewClientCtrl', ['$rootScope', '$scope', '$http', 'Upload', 'cloudinary', function($rootScope, $scope, $http, $upload, cloudinary) {
+  $rootScope.homeHeader = false;
   // Get request to /api/getGym to get users current data
   $http.get('/api/getGym')
   .then(function(data) {
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
   })
   .catch(function(err) {
     // If any errors console log error
