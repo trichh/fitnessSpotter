@@ -1,8 +1,9 @@
-angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$rootScope', '$http', 'Upload', 'cloudinary', function($scope, $rootScope, $http, $upload, cloudinary) {
+angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$rootScope', '$http', 'Upload', 'cloudinary', '$location', function($scope, $rootScope, $http, $upload, cloudinary, $location) {
+  // Specifying what header to display
   $rootScope.homeHeader = true;
   document.getElementById('homeHeader').style.display = "block";
   $rootScope.clientHeader = false;
-  
+
   // Function that uploads image to cloudinary
   $scope.uploadImage = function(files){
     $scope.files = files;
@@ -17,13 +18,15 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$rootSco
             tags: 'myphotoalbum',
             file: file
           }
-        }).success(function (data, status, headers, config) {
+        })
+        .success(function (data, status, headers, config) {
           file.result = data;
           // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
           // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
-        }).error(function (data, status, headers, config) {
+        })
+        .error(function (data, status, headers, config) {
           // Sends error if any
           file.result = data;
         });
@@ -74,20 +77,12 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', ['$scope', '$rootSco
       year: year
     })
     .then(function(data) {
-      console.log('COMING BACK: ', data);
+      // console.log("Created user successfully", data);
     })
-    // Setting inputs back to empty
-    $scope.email = '';
-    $scope.password = '';
-    $scope.name = '';
-    $scope.number = '';
-    $scope.basic = '';
-    $scope.plus = '';
-    $scope.premium = '';
-    $scope.cardName = '';
-    $scope.cardNumber = '';
-    $scope.securityCode = '';
-    $scope.month = '';
-    $scope.year = '';
+    .catch(function(err) {
+      // console.log("ERROR:", err);
+    });
+    // Redirects user back to homepage
+    $location.path('/');
   }
 }]);

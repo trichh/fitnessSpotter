@@ -1,10 +1,8 @@
 // Requiring packages
 var express = require('express');
-var app = express();
-var router = require('express').Router();
-var bodyParser = require('body-parser');
+var router = express.Router();
 
-// Requiring models
+// Requiring user and client models
 var User = require('../models/user.js');
 var Client = require('../models/client.js');
 
@@ -63,7 +61,7 @@ router.post('/updateUser', function(req, res) {
     if(err) {
       throw err;
     } else {
-      console.log("UPDATED USER INFO");
+      console.log("Updated user info");
     }
   })
 });
@@ -74,12 +72,12 @@ router.post('/updateClient', function(req, res) {
     if(err) {
       throw err;
     } else {
-      console.log("UPDATED CLIENT INFO");
+      console.log("Updated client info");
     }
   })
 });
 
-// When get request is made to /api/dashboard find all the logged in user's client data and then send the data and session data back
+// When get request is made to /api/dashboard find every client for the logged in user and then send the client data and session data back
 router.get('/dashboard', function(req, res) {
   Client.find({trainerId : req.session.passport.user._id}, function(err, data) {
     if(err) {
@@ -100,7 +98,7 @@ router.get('/getGym', function(req, res) {
   });
 });
 
-// When get request is made to /api/clientData find unique client's data and then send that data and session data back
+// When get request is made to /api/clientData find unique client's data based on route parameters and then send the client data and session data back
 router.get('/clientData', function(req, res) {
   Client.find({_id: req.query.clientId}, function(err, data) {
     if(err) {
@@ -114,20 +112,6 @@ router.get('/clientData', function(req, res) {
   });
 });
 
-// When get request is made to /api/editClient find clients data from database and send then send that data and the session data
-router.get('/editClient', function(req, res) {
-  Client.find({_id: req.query.clientId}, function(err, data) {
-    if(err) {
-      throw err;
-    } else {
-      res.json({
-        sessionData: req.session,
-        clientData: data
-      });
-    }
-  })
-});
-
 // When get request is made to /api/deleteClient find the unique client and remove from database
 router.get('/deleteClient', function(req, res) {
   Client.find({_id: req.query.clientId}).remove().exec();
@@ -138,7 +122,7 @@ router.get('/deleteUser', function(req, res) {
   User.find({_id: req.session.passport.user._id}).remove().exec();
 });
 
-// When get request is made to /api/clientDashboard find all clients data from the unique gym and then send that data back
+// When get request is made to /api/clientDashboard find every client from the unique gym and then send the client data back
 router.get('/clientDashboard', function(req, res) {
   Client.find({gymName: req.query.gymName}, function(err, data) {
     if(err) {
@@ -160,7 +144,9 @@ router.get('/trainerInfo', function(req, res) {
     if(err) {
       throw err;
     } else {
-      res.json({trainerData: data});
+      res.json({
+        trainerData: data
+      });
     }
   });
 });

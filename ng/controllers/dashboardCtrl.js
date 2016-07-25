@@ -1,10 +1,10 @@
 angular.module('fitnessSpotter').controller('DashboardCtrl', function($rootScope, $scope, $http) {
+  // Specifying what header to display
   $rootScope.homeHeader = false;
+
   // Get request to /api/dashboard to get list of clients for specific gym or trainer and also session data
   $http.get('/api/dashboard')
   .then(function(data) {
-    console.log("SESSION DATA:", data.data.sessionData.passport.user);
-    console.log("CLIENTS DATA:", data.data.clientData);
     // Making scope variable to use users gym name in dashboard view
     $scope.gymName = data.data.sessionData.passport.user.gymName;
     // Making scope variable to use users profile picture in dashboard view
@@ -18,6 +18,6 @@ angular.module('fitnessSpotter').controller('DashboardCtrl', function($rootScope
   })
   .catch(function(err) {
     // If any errors console log error
-    console.log(err);
+    // console.log(err);
   })
 });

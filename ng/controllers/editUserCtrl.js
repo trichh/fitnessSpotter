@@ -1,7 +1,9 @@
 angular.module('fitnessSpotter').controller('EditUserCtrl', ['$rootScope', '$scope', '$http', 'Upload', 'cloudinary', '$q', function($rootScope, $scope, $http, $upload, cloudinary, $q) {
+  // Specifying what header to display
   $rootScope.homeHeader = false;
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
+
   // Get request to /api/getGym to get users current data
   $http.get('/api/getGym')
   .then(function(data) {
@@ -25,8 +27,7 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$rootScope', '$sco
     requestFinished.resolve();
   })
   .catch(function(err) {
-    // If any errors console log error
-    console.log(err);
+    // console.log(err);
   });
 
   // Function that uploads image to cloudinary
@@ -43,13 +44,15 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$rootScope', '$sco
             tags: 'myphotoalbum',
             file: file
           }
-        }).success(function (data, status, headers, config) {
+        })
+        .success(function (data, status, headers, config) {
           file.result = data;
           // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
           // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
-        }).error(function (data, status, headers, config) {
+        })
+        .error(function (data, status, headers, config) {
           // Sends error if any
           file.result = data;
         });
@@ -142,7 +145,7 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$rootScope', '$sco
         year: year
       })
       .then(function(data) {
-        console.log('COMING BACK: ', data);
+        // console.log('COMING BACK: ', data);
       });
     });
   }
@@ -152,10 +155,10 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', ['$rootScope', '$sco
     // Get request to /api/deleteUser to remove user from database
     $http.get('/api/deleteUser')
     .then(function(data) {
-      console.log("CLIENT DELETED", data);
+      // console.log("CLIENT DELETED", data);
     })
     .catch(function(err) {
-      console.log(err);
+      // console.log(err);
     })
   }
 }]);

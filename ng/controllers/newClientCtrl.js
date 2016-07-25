@@ -1,5 +1,7 @@
 angular.module('fitnessSpotter').controller('NewClientCtrl', ['$rootScope', '$scope', '$http', 'Upload', 'cloudinary', function($rootScope, $scope, $http, $upload, cloudinary) {
+  // Specifying what header to display
   $rootScope.homeHeader = false;
+
   // Get request to /api/getGym to get users current data
   $http.get('/api/getGym')
   .then(function(data) {
@@ -9,8 +11,7 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ['$rootScope', '$sc
     $rootScope.dashboardRoute = gymName;
   })
   .catch(function(err) {
-    // If any errors console log error
-    console.log(err);
+    // console.log(err);
   });
 
   // Function that uploads image to cloudinary
@@ -27,13 +28,15 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ['$rootScope', '$sc
             tags: 'myphotoalbum',
             file: file
           }
-        }).success(function (data, status, headers, config) {
+        })
+        .success(function (data, status, headers, config) {
           file.result = data;
           // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
           // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
-        }).error(function (data, status, headers, config) {
+        })
+        .error(function (data, status, headers, config) {
           // Sends error if any
           file.result = data;
         });
@@ -61,7 +64,7 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', ['$rootScope', '$sc
       clientAssessment: clientAssessment
     })
     .then(function(data) {
-      console.log('COMING BACK: ', data);
+      // console.log('COMING BACK: ', data);
     })
   }
 }]);

@@ -1,9 +1,11 @@
 angular.module('fitnessSpotter').controller('EditClientCtrl', ['$rootScope', '$scope', '$http', 'Upload', 'cloudinary', '$q', '$routeParams', function($rootScope, $scope, $http, $upload, cloudinary, $q, $routeParams) {
+  // Specifying what header to display
   $rootScope.homeHeader = false;
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
+
   // Get request to /api/editClient to get clients current data
-  $http.get('/api/editClient', {
+  $http.get('/api/clientData', {
     params: {gymName: $routeParams.gymName, clientId: $routeParams.clientId}
   })
   .then(function(data) {
@@ -22,8 +24,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$rootScope', '$s
     requestFinished.resolve();
   })
   .catch(function(err) {
-    // If any errors console log error
-    console.log(err);
+    // console.log(err);
   });
 
   // Function that uploads image to cloudinary
@@ -40,13 +41,15 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$rootScope', '$s
             tags: 'myphotoalbum',
             file: file
           }
-        }).success(function (data, status, headers, config) {
+        })
+        .success(function (data, status, headers, config) {
           file.result = data;
           // Set variable to the image url where cloudinary is hosting it
           var imageUrl = data.url;
           // Set scope variable to previous variable that has the image url in order to send it with post request
           $scope.photo = imageUrl;
-        }).error(function (data, status, headers, config) {
+        })
+        .error(function (data, status, headers, config) {
           // Sends error if any
           file.result = data;
         });
@@ -89,7 +92,6 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$rootScope', '$s
       } else if(typeof $scope.clientAssessment !== undefined) {
         var clientAssessment = $scope.clientAssessment;
       }
-
       // Making post request to /api/updateClient
       $http.post('/api/updateClient', {
         // Sends data to backend so we can insert this information into the database
@@ -102,7 +104,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', ['$rootScope', '$s
         clientAssessment: clientAssessment
       })
       .then(function(data) {
-        console.log('COMING BACK: ', data);
+        // console.log('COMING BACK: ', data);
       });
     });
   }
