@@ -420,7 +420,7 @@ div.planWrapper div.planContainer > p:not(:last-of-type) {
 #profile #clientInfo p, #clientProfile #clientInfo p {
   font-size: 25px;
 }
-#profile #clientInfo a {
+#profile #clientList a {
   background-color: #2B00FF;
   border-radius: 3px;
   color: white;
