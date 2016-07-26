@@ -1,6 +1,7 @@
 // Requiring packages
 var express = require('express');
 var router = express.Router();
+var sanitize = require('mongo-sanitize');
 
 // Requiring user and client models
 var User = require('../models/user.js');
@@ -10,17 +11,17 @@ var Client = require('../models/client.js');
 router.post('/register', function(req, res) {
   // Storing the gym name all uppercase to use route params later to find trainer info for the client dashboard
   var trainer = new User({
-  email: req.body.email,
-  password: req.body.password,
-  gymName: req.body.gymName.toUpperCase(),
+  email: sanitize(req.body.email),
+  password: sanitize(req.body.password),
+  gymName: sanitize(req.body.gymName).toUpperCase(),
   profilePicture: null,
-  phoneNumber: req.body.phoneNumber,
-  paymentPlan: req.body.paymentPlan,
-  cardHolder: req.body.cardHolder,
-  cardNumber: req.body.cardNumber,
-  securityCode: req.body.securityCode,
-  month: req.body.month,
-  year: req.body.year,
+  phoneNumber: sanitize(req.body.phoneNumber),
+  paymentPlan: sanitize(req.body.paymentPlan),
+  cardHolder: sanitize(req.body.cardHolder),
+  cardNumber: sanitize(req.body.cardNumber),
+  securityCode: sanitize(req.body.securityCode),
+  month: sanitize(req.body.month),
+  year: sanitize(req.body.year),
   });
   trainer.save(function(err) {
     if(err) {
