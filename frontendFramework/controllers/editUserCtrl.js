@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('EditUserCtrl', function($rootScope, $scope, $http, $q) {
+angular.module('fitnessSpotter').controller('EditUserCtrl', function($rootScope, $scope, $http, $q, $location) {
   // Specifying what header to display
   $rootScope.homeHeader = false;
   // Creates a deferred object which will finish when request is done
@@ -117,6 +117,7 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', function($rootScope,
       .then(function(data) {
         // console.log(data);
       });
+      $location.path('/');
     });
   }
 

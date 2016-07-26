@@ -76,6 +76,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', function($rootScop
       .then(function(data) {
         // console.log(data);
       });
+      $location.path('/admin/' + gymName + '/dashboard');
     });
   }
 });
