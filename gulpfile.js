@@ -11,7 +11,7 @@ gulp.task('server', function() {
   nodemon({
     script: 'server.js',
     ext: 'js',
-    ignore: ['ng*', 'public*']
+    ignore: ['frontendFramework*', 'public*']
   });
 });
 
@@ -22,11 +22,11 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('./public'));
 });
 
-// Gulp task that updates main.js everytime theres a file change in the ng folder
+// Gulp task that updates main.js everytime theres a file change in the frontendFramework folder
 gulp.task('js:build', function() {
   return gulp.src([
-    './ng/**/module.js',
-    './ng/**/*.js'
+    './frontendFramework/**/module.js',
+    './frontendFramework/**/*.js'
   ])
   .pipe(ngAnnotate())
   .pipe(concat('./main.js'))
@@ -34,9 +34,9 @@ gulp.task('js:build', function() {
   .pipe(gulp.dest('./public/assets/js/'));
 });
 
-// Gulp task that watches for any updates inside the ng folder, if there is then run the js:build gulp task
+// Gulp task that watches for any updates inside the frontendFramework folder, if there is then run the js:build gulp task
 gulp.task('js:watch', ['js:build'], function () {
-  gulp.watch('./ng/**/*.js', ['js:build'])
+  gulp.watch('./frontendFramework/**/*.js', ['js:build'])
 });
 
 // When you run gulp in terminal it runs all gulp tasks
