@@ -11,27 +11,8 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope
     $rootScope.dashboardRoute = gymName;
   })
   .catch(function(err) {
-    // If any errors console log error
-    console.log(err);
+    // console.log(err);
   });
-
-  // Function that gets file uploaded
-  var getFiles= function() {
-    var selectedFile = document.getElementById('profilePhoto').files;
-    var fileListLength = selectedFile.length;
-    var i = 0;
-    // Loops through files uploaded
-    while ( i < fileListLength) {
-        var file = selectedFile[i];
-        console.log("FILE:", file);
-        console.log("FILE NAME", file.name);
-        $scope.photo = file.name;
-        i++;
-    }
-  }
-
-  // Updates file input when changed
-  document.getElementById('profilePhoto').onchange=getFiles;
 
   // Function runs when users submit add client form
   $scope.addClient = function() {
