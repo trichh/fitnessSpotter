@@ -140,7 +140,7 @@ app.post('/uploadClientImage', function(req, res) {
       })
       var gymName = req.session.passport.user.gymName;
       gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-      res.redirect("/admin/" + gymName + "/dashboard");
+      res.end();
     });
   });
 });
