@@ -38,14 +38,14 @@ router.post('/add-client', function(req, res) {
   var gymName = req.session.passport.user.gymName;
   gymName = gymName.replace(/\s+/g, '-').toLowerCase();
   var client = new Client({
-    trainerId: req.session.passport.user._id,
-    gymName: gymName,
-    name: req.body.name,
-    weight: req.body.weight,
+    trainerId: sanitize(req.session.passport.user._id),
+    gymName: sanitize(gymName),
+    name: sanitize(req.body.name),
+    weight: sanitize(req.body.weight),
     profilePicture: null,
-    workoutPlan: req.body.workoutPlan,
-    mealPlan: req.body.mealPlan,
-    clientAssessment: req.body.clientAssessment
+    workoutPlan: sanitize(req.body.workoutPlan),
+    mealPlan: sanitize(req.body.mealPlan),
+    clientAssessment: sanitize(req.body.clientAssessment)
   });
   client.save(function(err) {
     if(err) {
