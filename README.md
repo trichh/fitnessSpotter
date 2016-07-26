@@ -17,6 +17,10 @@ Now that you have the project installed, install the dependencies. Paste the fol
 $ cd fitnessSpotter
 $ npm install
 ```
+Globally install bower
+```
+$ npm install bower -g
+```
 Lastly install the libraries by pasting the following command in terminal.
 ```
 $ bower install
