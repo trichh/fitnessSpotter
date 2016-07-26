@@ -1,4 +1,4 @@
-angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope, $scope, $http, $location) {
+angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope, $scope, $http) {
   // Specifying what header to display
   $rootScope.homeHeader = false;
 
@@ -35,7 +35,6 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope
     })
     .then(function(data) {
       // console.log(data);
-    });
-    $location.path('/admin/' + gymName + '/dashboard');
+    })
   }
 });
