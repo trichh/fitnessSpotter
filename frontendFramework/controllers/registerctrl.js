@@ -1,4 +1,9 @@
-angular.module('fitnessSpotter').controller('RegisterCtrl', function($scope, $http) {
+angular.module('fitnessSpotter').controller('RegisterCtrl', function($rootScope, $scope, $http) {
+  // Specifying what header to display
+  $rootScope.homeHeader = true;
+  document.getElementById('homeHeader').style.display = "block";
+  $rootScope.clientHeader = false;
+
   // Function that gets file uploaded
   var getFiles= function() {
     var selectedFile = document.getElementById('profilePhoto').files;
@@ -59,20 +64,7 @@ angular.module('fitnessSpotter').controller('RegisterCtrl', function($scope, $ht
       year: year
     })
     .then(function(data) {
-      console.log('COMING BACK: ', data);
+      // console.log('COMING BACK: ', data);
     })
-    // Setting inputs back to empty
-    $scope.email = '';
-    $scope.password = '';
-    $scope.name = '';
-    $scope.number = '';
-    $scope.basic = '';
-    $scope.plus = '';
-    $scope.premium = '';
-    $scope.cardName = '';
-    $scope.cardNumber = '';
-    $scope.securityCode = '';
-    $scope.month = '';
-    $scope.year = '';
   }
 });

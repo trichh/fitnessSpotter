@@ -1,11 +1,14 @@
-angular.module('fitnessSpotter').controller('NewClientCtrl', function($scope, $http) {
+angular.module('fitnessSpotter').controller('NewClientCtrl', function($rootScope, $scope, $http) {
+  // Specifying what header to display
+  $rootScope.homeHeader = false;
+
   // Get request to /api/getGym to get users current data
   $http.get('/api/getGym')
   .then(function(data) {
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
   })
   .catch(function(err) {
     // If any errors console log error
@@ -50,7 +53,7 @@ angular.module('fitnessSpotter').controller('NewClientCtrl', function($scope, $h
       clientAssessment: clientAssessment
     })
     .then(function(data) {
-      console.log('COMING BACK: ', data);
+      // console.log(data);
     })
   }
 });

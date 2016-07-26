@@ -1,13 +1,16 @@
-angular.module('fitnessSpotter').controller('EditUserCtrl', function($scope, $http, $q) {
+angular.module('fitnessSpotter').controller('EditUserCtrl', function($rootScope, $scope, $http, $q) {
+  // Specifying what header to display
+  $rootScope.homeHeader = false;
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
+
   // Get request to /api/getGym to get users current data
   $http.get('/api/getGym')
   .then(function(data) {
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
     // Making scope variables to users old data just in case they don't update any of the fields
     $scope.oldEmail = data.data.sessionData.passport.user.email;
     $scope.oldPassword = data.data.sessionData.passport.user.password;
@@ -131,7 +134,7 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', function($scope, $ht
         year: year
       })
       .then(function(data) {
-        console.log('COMING BACK: ', data);
+        // console.log(data);
       });
     });
   }
@@ -141,10 +144,10 @@ angular.module('fitnessSpotter').controller('EditUserCtrl', function($scope, $ht
     // Get request to /api/deleteUser to remove user from database
     $http.get('/api/deleteUser')
     .then(function(data) {
-      console.log("CLIENT DELETED");
+      // console.log("CLIENT DELETED");
     })
     .catch(function(err) {
-      console.log(err);
+      // console.log(err);
     })
   }
 });

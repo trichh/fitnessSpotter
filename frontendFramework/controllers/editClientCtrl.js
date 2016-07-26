@@ -1,6 +1,9 @@
-angular.module('fitnessSpotter').controller('EditClientCtrl', function($scope, $http, $q, $routeParams) {
+angular.module('fitnessSpotter').controller('EditClientCtrl', function($rootScope, $scope, $http, $q, $routeParams) {
+  // Specifying what header to display
+  $rootScope.homeHeader = false;
   // Creates a deferred object which will finish when request is done
   var requestFinished = $q.defer();
+
   // Get request to /api/editClient to get clients current data
   $http.get('/api/clientData', {
     params: {gymName: $routeParams.gymName, clientId: $routeParams.clientId}
@@ -9,7 +12,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', function($scope, $
     // Making scope variable to users gymName to set up link
     var gymName = data.data.sessionData.passport.user.gymName;
     gymName = gymName.replace(/\s+/g, '-').toLowerCase();
-    $scope.dashboardRoute = gymName;
+    $rootScope.dashboardRoute = gymName;
     // Making scope variables to current data in case user doesn't update this information
     $scope.oldName = data.data.clientData[0].name;
     $scope.oldWeight = data.data.clientData[0].weight;
@@ -21,8 +24,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', function($scope, $
     requestFinished.resolve();
   })
   .catch(function(err) {
-    // If any errors console log error
-    console.log(err);
+    // console.log(err);
   });
 
   // Function that gets file uploaded
@@ -90,7 +92,7 @@ angular.module('fitnessSpotter').controller('EditClientCtrl', function($scope, $
         clientAssessment: clientAssessment
       })
       .then(function(data) {
-        console.log('COMING BACK: ', data);
+        // console.log(data);
       });
     });
   }

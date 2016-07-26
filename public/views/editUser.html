@@ -1,16 +1,4 @@
 <section id="editUser">
-  <header>
-    <a href="/admin/{{dashboardRoute}}/dashboard"><h1>Fitness Spotter</h1></a>
-    <nav >
-      <ul>
-        <li><a href="#">Menu</a></li>
-        <li><a href="/admin/{{dashboardRoute}}/dashboard">Dashboard</a></li>
-        <li><a href="/admin/{{dashboardRoute}}/add-client">Add client</a></li>
-        <li><a href="/admin/{{dashboardRoute}}/edit">Edit info</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
   <h2>Edit user info</h2>
   <form method="post" action="/uploadImage" enctype="multipart/form-data" ng-submit="editUser()">
     <h3>Account info</h3>

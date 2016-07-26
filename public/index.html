@@ -18,6 +18,42 @@
     <script src="assets/js/config.js" type="text/javascript"></script>
   </head>
   <body>
+    <header id="homeHeader" ng-show="homeHeader" ng-hide="hide">
+      <a href="/"><h1>Fitness Spotter</h1></a>
+      <nav id="homeNav">
+        <ul>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Search for gyms or trainers</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="/login">Sign in</a></li>
+          <li><a href="/register">Sign up</a></li>
+        </ul>
+      </nav>
+    </header>
+    <header ng-show="!homeHeader">
+      <a href="/admin/{{dashboardRoute}}/dashboard"><h1>Fitness Spotter</h1></a>
+      <nav >
+        <ul>
+          <li><a href="#">Menu</a></li>
+          <li><a href="/admin/{{dashboardRoute}}/dashboard">Dashboard</a></li>
+          <li><a href="/admin/{{dashboardRoute}}/add-client">Add client</a></li>
+          <li><a href="/admin/{{dashboardRoute}}/edit">Edit info</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+    <header ng-show="clientHeader">
+      <a href="/"><h1>Fitness Spotter</h1></a>
+      <nav >
+        <ul>
+          <li><a href="#">Menu</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/{{dashboardRoute}}/dashboard">Dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
     <ng-view></ng-view>
   </body>
 </html>
