@@ -65,7 +65,7 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-// Making sure user is logged in and authenticated before user can access any admin pages
+// Making sure user is logged in and authenticated before user can access any of the admin pages
 app.get('/admin/:gymName/*', isLoggedIn, function(req, res) {
   res.render('./public/assets/views/dashboard.html', {
     user : req.user
